@@ -24,7 +24,7 @@
                 <?php foreach ($environments as $environment): ?>
                 <tr>
                     <td><?= $this->Number->format($environment->id) ?></td>
-                    <td><?= $this->Number->format($environment->school_id) ?></td>
+                    <td><?= $this->Html->link( $this->Number->format($environment->school_id), [ 'controller' => 'schools', 'action' => 'view', $environment->school_id ] ) ?></td>
                     <td><?= h($environment->room) ?></td>
                     <td><?= h($environment->period) ?></td>
                     <td><?= h($environment->created) ?></td>

@@ -24,7 +24,7 @@
                 <?php foreach ($schools as $school): ?>
                 <tr>
                     <td><?= $this->Number->format($school->id) ?></td>
-                    <td><?= h($school->name) ?></td>
+                    <td><?= $this->Html->link( $school->name, [ 'action' => 'view', $school->id ] ) ?></td>
                     <td><?= h($school->phone) ?></td>
                     <td><?= h($school->address) ?></td>
                     <td><?= h($school->created) ?></td>

@@ -18,8 +18,7 @@ class EnvironmentsController extends AppController
      */
     public function index()
     {
-        $environments = $this->paginate($this->Environments);
-
+        $environments = $this->paginate($this->Environments );
         $this->set(compact('environments'));
     }
 
