@@ -103,6 +103,13 @@ if (Configure::read('debug')) {
 }
 
 /*
+ * DebugKit
+ */
+Configure::write( 'DebugKit.safeTld', [ 'dev', 'local', 'finn.games' ] );
+Configure::write( 'DebugKit.ignoreAuthorization', true );
+Configure::write( 'DebugKit.forceEnable', true );
+
+/*
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
  * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
  */

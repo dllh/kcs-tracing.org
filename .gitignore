@@ -3,6 +3,7 @@
 /vendor/*
 /config/app.php
 /config/app_local.php
+composter.lock
 
 /tmp/cache/models/*
 !/tmp/cache/models/empty

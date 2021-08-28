@@ -11,6 +11,7 @@ namespace App\Controller;
  */
 class SchoolsController extends AppController
 {
+
     /**
      * Index method
      *

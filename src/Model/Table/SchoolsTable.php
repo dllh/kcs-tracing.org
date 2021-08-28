@@ -57,8 +57,8 @@ class SchoolsTable extends Table
         ]);
         $this->belongsToMany('Environments', [
             'foreignKey' => 'school_id',
-            'targetForeignKey' => 'environment_id',
-            'joinTable' => 'schools_environments',
+            //'targetForeignKey' => 'environment_id',
+            'targetForeignKey' => 'id',
         ]);
     }
 
