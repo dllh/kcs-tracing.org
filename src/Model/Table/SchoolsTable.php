@@ -49,6 +49,7 @@ class SchoolsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+	/*
         $this->hasMany('Environments', [
             'foreignKey' => 'school_id',
         ]);
@@ -59,7 +60,16 @@ class SchoolsTable extends Table
             'foreignKey' => 'school_id',
             //'targetForeignKey' => 'environment_id',
             'targetForeignKey' => 'id',
-        ]);
+	]);
+	 */
+
+	//$this->belongsToMany( 'Environments' );
+	
+	$this->belongsToMany( 'Environments', [
+		'foreignKey' => 'id',
+		'joinType'   => 'INNER',
+	] );
+
     }
 
     /**

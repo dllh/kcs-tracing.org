@@ -21,7 +21,7 @@
                     echo $this->Form->control('school_id');
                     echo $this->Form->control('room');
                     echo $this->Form->control('period');
-                    echo $this->Form->control('schools._ids', ['options' => $schools]);
+                    //echo $this->Form->control('schools._ids', ['options' => $schools]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

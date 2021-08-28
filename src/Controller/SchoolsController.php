@@ -33,9 +33,12 @@ class SchoolsController extends AppController
      */
     public function view($id = null)
     {
+	    /*
         $school = $this->Schools->get($id, [
             'contain' => ['Environments', 'Reports'],
-        ]);
+	]);
+	     */
+	$school = $this->Schools->get( $id );
 
         $this->set(compact('school'));
     }
@@ -57,7 +60,7 @@ class SchoolsController extends AppController
             }
             $this->Flash->error(__('The school could not be saved. Please, try again.'));
         }
-        $environments = $this->Schools->Environments->find('list', ['limit' => 200]);
+        //$environments = $this->Schools->Environments->find('list', ['limit' => 200]);
         $this->set(compact('school', 'environments'));
     }
 

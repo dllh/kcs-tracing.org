@@ -49,6 +49,7 @@ class EnvironmentsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+	/*
         $this->belongsTo('Schools', [
             'foreignKey' => 'school_id',
             'joinType' => 'INNER',
@@ -60,7 +61,21 @@ class EnvironmentsTable extends Table
             'foreignKey' => 'environment_id',
             'targetForeignKey' => 'school_id',
             'joinTable' => 'schools_environments',
-        ]);
+	]);
+	 */
+
+	// This works for reads but gives a "column not found" error when looking for Schools.school_id on writes.
+	$this->hasOne( 'Schools', [
+		'foreignKey' => 'id',
+		'bindingKey' => 'school_id',
+	]);
+
+	/*
+	$this->belongsToMany( 'Schools', [
+		'foreignKey' => 'school_id',
+		'bindingKey' => 'id',
+	] );
+	 */
     }
 
     /**
