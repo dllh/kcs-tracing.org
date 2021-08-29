@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Html;
+use yii\data\Pagination;
+use yii\widgets\LinkPager;
 use app\models\Exposure;
 $this->title = 'Exposures';
 
@@ -18,7 +20,15 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			<th>Period</th>
 		</tr>
 
-		<?php foreach( Exposure::find()->each( 10 ) as $exposure ) : ?>
+		<?php
+			$query = Exposure::find();
+			$count = $query->count();
+			$pagination = new Pagination( [ 'pageSize' => 20, 'totalCount' => $count ] );
+			$exposures = $query->offset( $pagination->offset )
+		      		->limit( $pagination->limit )
+	      			->all();
+		?>
+		<?php foreach( $exposures as $exposure ) : ?>
 			<tr>
 				<td><?php echo Html::a( $exposure->school_id, [ 'site/school', 'id' => $exposure->school_id ]); ?></td>
 				<td><?php echo Html::encode( $exposure->room ); ?></td>
@@ -26,5 +36,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			</tr>	
 		<?php endforeach; ?>
 	</table>
+	<?php echo LinkPager::widget( [ 'pagination' => $pagination ] ); ?>
 </div>
 
