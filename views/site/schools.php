@@ -22,7 +22,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		</tr>
 
 		<?php
-                        $query = School::find();
+			$query = School::find()->orderBy( [ 'name' => SORT_ASC ] );
                         $count = $query->count();
                         $pagination = new Pagination( [ 'pageSize' => 20, 'totalCount' => $count ] );
                         $schools = $query->offset( $pagination->offset )
