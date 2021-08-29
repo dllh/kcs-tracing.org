@@ -21,7 +21,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		</tr>
 
 		<?php
-			$query = Exposure::find();
+			$query = Exposure::find()->join( 'LEFT JOIN', 'schools', 'schools.id = exposures.school_id' );
 			$count = $query->count();
 			$pagination = new Pagination( [ 'pageSize' => 20, 'totalCount' => $count ] );
 			$exposures = $query->offset( $pagination->offset )
