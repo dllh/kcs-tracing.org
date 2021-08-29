@@ -34,3 +34,6 @@ tests/_support/_generated
 
 # Datbase
 /config/db.php
+
+# Log
+/log
