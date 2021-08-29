@@ -14,4 +14,8 @@ class Exposure extends ActiveRecord {
 			[[ 'school_id', 'room', 'period', ], 'required' ],
 		];
 	}
+
+	public function getSchool() {
+		return $this->hasOne( School::class, [ 'id' => 'school_id' ] );
+	}
 }

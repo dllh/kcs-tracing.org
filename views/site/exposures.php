@@ -21,16 +21,16 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		</tr>
 
 		<?php
-			$query = Exposure::find()->join( 'LEFT JOIN', 'schools', 'schools.id = exposures.school_id' );
+			$query = Exposure::find();
 			$count = $query->count();
 			$pagination = new Pagination( [ 'pageSize' => 20, 'totalCount' => $count ] );
 			$exposures = $query->offset( $pagination->offset )
 		      		->limit( $pagination->limit )
-	      			->all();
+				->all();
 		?>
 		<?php foreach( $exposures as $exposure ) : ?>
 			<tr>
-				<td><?php echo Html::a( $exposure->school_id, [ 'site/school', 'id' => $exposure->school_id ]); ?></td>
+				<td><?php echo Html::a( $exposure->school->name, [ 'site/school', 'id' => $exposure->school_id ]); ?></td>
 				<td><?php echo Html::encode( $exposure->room ); ?></td>
 				<td><?php echo Html::encode( $exposure->period ); ?></td>
 			</tr>	

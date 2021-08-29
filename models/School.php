@@ -14,4 +14,8 @@ class School extends ActiveRecord {
 			[[ 'name', ], 'required' ],
 		];
 	}
+
+	public function _____getExposure() {
+		return $this->hasMany( Exposure::class, [ 'id' => 'school_id' ] );
+	}
 }
