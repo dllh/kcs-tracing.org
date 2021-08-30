@@ -7,6 +7,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
@@ -111,17 +112,33 @@ class SchoolsController extends Controller
 	    }
     }
 
-    /*
-     * Yii::$app->user->isGuest
-     */
-    /*
-    public function behaviors() {
-	    return [
-		    [
-			    'class'        => 'yii\filters\HttpCache',
-			    'only'         => [ 'create', 'edit', 'delete', ],
-		    ],
-	];
+    public function beforeAction( $action ) {
+
+	$isGuest = Yii::$app->user->isGuest;
+
+	// List of actions that are available to guests.
+	$publicActionIds = [ 'index', 'view' ];
+
+	// Always return true for logged-in users.
+	if ( ! $isGuest ) {
+		return true;
+	}
+
+	//print( '<pre>' . print_r( $action, true ) . '</pre>' ); exit;
+	if ( $isGuest ) {
+		if ( ! in_array( $action->id, $publicActionIds ) ) {
+			//return false;
+			throw new NotFoundHttpException('Not found');
+		}
+	}
+
+	// If the parent function returns false, return false.
+	if ( ! parent::beforeAction( $action ) ) {
+		return false;
+	}
+
+	// If nothing else causes us to bail early, return true.
+	return true;
     }
-     */
+
 }

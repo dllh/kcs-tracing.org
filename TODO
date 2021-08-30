@@ -1,12 +1,12 @@
-o Authentication
 x Data entry
+x Display reports
+x Add zip code to reports for maps?
 o Enter report data
-o Display reports
+o Authentication (add restrictions; a login system is in place).
 o Style
 o Check for spam (guid in cookie?)
 o Total stats
 o Graphs/etc.
-o Add zip code to reports for maps?
 o Also make the data zip code searchable?
 o Show hot spots on the home page with the most cases reported in the last N days.
 o Data export in case people want to crunch the data themselves.
