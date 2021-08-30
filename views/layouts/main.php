@@ -38,15 +38,15 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Schools', 'url' => ['/site/schools']],
-            ['label' => 'Exposures', 'url' => ['/site/exposures']],
+            ['label' => 'Schools', 'url' => ['/schools']],
+            ['label' => 'Exposures', 'url' => ['/exposures']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' => ['/user/security/login']]
             ) : (
                 '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
+                . Html::beginForm(['/user/security/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
                     'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']

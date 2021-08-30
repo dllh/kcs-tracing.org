@@ -12,6 +12,9 @@ class School extends ActiveRecord {
 	public function rules() {
 		return [
 			[[ 'name', ], 'required' ],
+			[[ 'address', ], 'required' ],
+			[[ 'phone', ], 'required' ],
+			[[ 'url', ], 'required' ],
 		];
 	}
 

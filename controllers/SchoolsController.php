@@ -9,11 +9,10 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-//use app\models\School;
-//use app\models\Exposure;
-use app\models\User;
+use app\models\School;
+use app\models\Exposure;
 
-class SiteController extends Controller
+class SchoolsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -58,40 +57,58 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
+     * Displays schools page.
      *
      * @return string
      */
-    public function actionIndex()
-    {
-        return $this->render('index');
+    public function actionIndex() {
+	    return $this->render( 'index' );
     }
 
     /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
+     * Displays single school page.
      *
      * @return string
      */
-    public function actionAbout()
-    {
-        return $this->render('about');
+    public function actionView( $id ) {
+	    $model = School::findOne( $id );
+	    if ( $model === null ) {
+		throw new NotFoundHttpException;
+	    }
+	    return $this->render( 'view', [
+		    'model' => $model,
+	    ] );
     }
+
+    /**
+     * Creates school record.
+     *
+     * @return string
+     */
+    public function actionCreate() {
+	    $model = new School();
+	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
+		    return $this->redirect( [ 'schools/view', 'id' => $model->id ] );
+	    } else {
+		    return $this->render( 'save', [ 'model' => $model ] ); 
+	    }
+    }
+
+    /**
+     * Edits school record.
+     *
+     */
+    public function actionEdit( $id ) {
+	    $model = School::findOne( $id );
+	    if ( $model === null ) {
+		throw new NotFoundException;
+	    }
+	    
+	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
+		    return $this->redirect( [ 'schools/view', 'id' => $model->id ] );
+	    } else {
+		    return $this->render( 'save', [ 'model' => $model ] ); 
+	    }
+    }
+
 }

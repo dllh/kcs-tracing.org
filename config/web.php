@@ -19,10 +19,10 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
-        ],
+        //'user' => [
+        //   'identityClass' => 'app\models\User',
+        //  'enableAutoLogin' => true,
+        //],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -48,9 +48,15 @@ $config = [
             'showScriptName' => false,
             'rules' => [
             ],
-        ],
+	],
     ],
     'params' => $params,
+];
+
+$config['modules']['user'] = [
+	'class'  => 'dektrium\user\Module',
+	'admins' => [ 'dllh' ],
+	'enableConfirmation' => false,
 ];
 
 if (YII_ENV_DEV) {
