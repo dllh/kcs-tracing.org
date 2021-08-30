@@ -11,8 +11,9 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
 use app\models\Exposure;
+use app\models\Report;
 
-class SchoolsController extends Controller
+class ReportsController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -57,7 +58,7 @@ class SchoolsController extends Controller
     }
 
     /**
-     * Displays schools page.
+     * Displays reports page.
      *
      * @return string
      */
@@ -66,12 +67,13 @@ class SchoolsController extends Controller
     }
 
     /**
-     * Displays single school page.
+     * Displays single report page.
      *
      * @return string
      */
     public function actionView( $id ) {
-	    $model = School::findOne( $id );
+	    $model = Report::findOne( $id );
+	    //die( '<pre>' . print_r( $model, true ) .'</pre>' );
 	    if ( $model === null ) {
 		throw new NotFoundHttpException;
 	    }
@@ -81,39 +83,36 @@ class SchoolsController extends Controller
     }
 
     /**
-     * Creates school record.
+     * Creates report record.
      *
      * @return string
      */
     public function actionCreate() {
-	    $model = new School();
+	    $model = new Report();
 	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
-		    return $this->redirect( [ 'schools/view', 'id' => $model->id ] );
+		    return $this->redirect( [ 'reports/view', 'id' => $model->id ] );
 	    } else {
 		    return $this->render( 'save', [ 'model' => $model ] ); 
 	    }
     }
 
     /**
-     * Edits school record.
+     * Edits report record.
      *
      */
     public function actionEdit( $id ) {
-	    $model = School::findOne( $id );
+	    $model = Report::findOne( $id );
 	    if ( $model === null ) {
 		throw new NotFoundException;
 	    }
 	    
 	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
-		    return $this->redirect( [ 'schools/view', 'id' => $model->id ] );
+		    return $this->redirect( [ 'reports/view', 'id' => $model->id ] );
 	    } else {
 		    return $this->render( 'save', [ 'model' => $model ] ); 
 	    }
     }
 
-    /*
-     * Yii::$app->user->isGuest
-     */
     /*
     public function behaviors() {
 	    return [

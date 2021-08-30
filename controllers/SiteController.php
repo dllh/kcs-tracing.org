@@ -9,8 +9,6 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-//use app\models\School;
-//use app\models\Exposure;
 use app\models\User;
 
 class SiteController extends Controller
