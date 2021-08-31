@@ -1,6 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\School;
+use yii\helpers\ArrayHelper;
+
 ?>
 
 <h1>Save Exposure</h1>
@@ -10,7 +13,7 @@ $form = ActiveForm::begin([
     'id' => 'exposure-form',
     'options' => ['class' => 'form-vertical'],
 ]) ?>
-    <?= $form->field($model, 'school_id')->textInput()->label( 'School id' ) ?>
+    <?= $form->field($model, 'school_id')->dropDownList( ArrayHelper::map( School::find()->orderBy( 'name' )->all(), 'id', 'name' ) )->label( 'School' ) ?>
     <?= $form->field($model, 'room')->textInput()->label( 'School room' ) ?>
     <?= $form->field($model, 'period')->textInput()->label( 'Class period' ) ?>
 
