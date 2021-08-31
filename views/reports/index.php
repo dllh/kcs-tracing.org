@@ -1,4 +1,6 @@
 <?php
+
+use Yii;
 use yii\helpers\Html;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
@@ -12,6 +14,12 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
 <div class="site-exposures">
 	<h1><?= html::encode( $this->title ) ?></h1>
+
+	<?php if ( ! Yii::$app->user->isGuest ): ?>
+		<div style="float: right;">
+		<?php echo Html::a( 'New Report', [ 'reports/create' ] ); ?>
+		</div>
+	<?php endif; ?>
 
 	<table>
 		<tr>

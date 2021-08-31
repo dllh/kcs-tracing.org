@@ -1,8 +1,8 @@
 x Data entry
 x Display reports
 x Add zip code to reports for maps?
+x Authentication (add restrictions; a login system is in place).
 o Enter report data
-o Authentication (add restrictions; a login system is in place).
 o Style
 o Check for spam (guid in cookie?)
 o Total stats
@@ -14,3 +14,4 @@ o Add search for schools
 o Add select2 for school select box for data entry.
 o Other content (about/etc.)
 o School district and board member contact
+o Report model isn't saving zip code data.

@@ -14,6 +14,11 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 <div class="site-schools">
 	<h1><?= html::encode( $this->title ) ?></h1>
 
+	<?php if ( ! Yii::$app->user->isGuest ): ?>
+                <div style="float: right;">
+                <?php echo Html::a( 'New School', [ 'schools/create' ] ); ?>
+                </div>
+        <?php endif; ?>
 	<table>
 		<tr>
 			<th>Name</th>

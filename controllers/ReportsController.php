@@ -74,7 +74,6 @@ class ReportsController extends Controller
      */
     public function actionView( $id ) {
 	    $model = Report::findOne( $id );
-	    //die( '<pre>' . print_r( $model, true ) .'</pre>' );
 	    if ( $model === null ) {
 		throw new NotFoundHttpException;
 	    }
