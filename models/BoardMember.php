@@ -17,4 +17,8 @@ class BoardMember extends ActiveRecord {
 			[[ 'district', ], 'required' ],
 		];
 	}
+
+	public function getSchools() {
+                return $this->hasMany( School::class, [ 'board_member_id' => 'id' ] );
+	}
 }

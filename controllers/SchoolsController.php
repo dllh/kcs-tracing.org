@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
-use app\models\Exposure;
+use app\models\BoardMember;
 
 class SchoolsController extends Controller
 {

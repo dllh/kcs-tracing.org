@@ -87,7 +87,7 @@ class BoardMembersController extends Controller
     public function actionCreate() {
 	    $model = new BoardMember();
 	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
-		    return $this->redirect( [ 'boardMembers/view', 'id' => $model->id ] );
+		    return $this->redirect( [ 'board-members/view', 'id' => $model->id ] );
 	    } else {
 		    return $this->render( 'save', [ 'model' => $model ] ); 
 	    }
@@ -104,7 +104,7 @@ class BoardMembersController extends Controller
 	    }
 	    
 	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
-		    return $this->redirect( [ 'boardMembers/view', 'id' => $model->id ] );
+		    return $this->redirect( [ 'board-members/view', 'id' => $model->id ] );
 	    } else {
 		    return $this->render( 'save', [ 'model' => $model ] ); 
 	    }

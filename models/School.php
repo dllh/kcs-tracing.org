@@ -18,7 +18,7 @@ class School extends ActiveRecord {
 		];
 	}
 
-	public function _____getExposure() {
-		return $this->hasMany( Exposure::class, [ 'id' => 'school_id' ] );
-	}
+	public function getBoardMember() {
+                return $this->hasOne( BoardMember::class, [ 'id' => 'board_member_id' ] );
+        }
 }

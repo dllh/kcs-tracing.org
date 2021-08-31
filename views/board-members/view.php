@@ -6,8 +6,8 @@ use yii\widgets\ActiveForm;
 $this->title = 'Board Member - ' . $model->name;
 
 // Add relevant info to the page title and nav breadcrumbs.
-$this->params[ 'breadcrumbs' ][] = 'Schools';
-
+$this->params[ 'breadcrumbs' ][] = 'Board Members';
+//die( '<pre>' . print_r( $model, true ) . '</pre>' );
 ?>
 
 <div class="site-school">
@@ -19,11 +19,21 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 		</tr>
 		<tr>
 			<th>Email</th>
-			<td><?php echo Html::encode( $model->email ) ?></td>
+			<td><?php echo Html::a( $model->email, 'mailto:' . $model->email ) ?></td>
 		</tr>
 		<tr>
 			<th>District</th>
 			<td><?php echo Html::encode( $model->district ) ?></td>
+		</tr>
+		<tr>
+			<th>Schools Served</th>
+			<td>
+				<ul>
+			<?php foreach ( $model->schools as $school ) : ?>
+				<li><?php echo Html::a( $school->name, [ 'schools/view', 'id' => $school->id ] ) ?></li>
+			<?php endforeach; ?>
+				</ul>
+			</td>
 		</tr>
 	</table>
 </div>
