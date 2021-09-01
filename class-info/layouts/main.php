@@ -34,36 +34,15 @@ AppAsset::register($this);
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
-
-
-    $navBarItems = [];
-    $navBarItems[] = ['label' => 'Home', 'url' => ['/site/index']];
-    $navBarItems[] = ['label' => 'Schools', 'url' => ['/schools']];
-    $navBarItems[] = ['label' => 'School Board', 'url' => ['/board-members']];
-    $navBarItems[] = ['label' => 'Add Report', 'url' => ['/reports/create']];
-    //$navBarItems[] = ['label' => 'About', 'url' => ['/site/about']];
-    //$navBarItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
-    if ( ! Yii::$app->user->isGuest ) {
-	$logoutForm = Html::beginForm(['/user/security/logout'], 'post', ['class' => 'form-inline'])
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm();
-	$navBarItems[] = ['label' => 'Class Details', 'url' => ['/class-details']];
-	$navBarItems[] = ['label' => 'Reports', 'url' => ['/reports']];
-	//$navBarItems[] = ['label' => 'Log Out', 'url' => ['/user/security/logout']];
-	$navBarItems[] = $logoutForm;
-    } else {
-    	$navBarItems[] = ['label' => 'Admin Login', 'url' => ['/user/security/login']];
-    }
-
-    echo Nav::widget( [
+    echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
-	'items' => $navBarItems,
-    ] );
-
-/*
+        'items' => [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Schools', 'url' => ['/schools']],
+            ['label' => 'School Room/Period', 'url' => ['/school-room-period']],
+            ['label' => 'Reports', 'url' => ['/reports']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/user/security/login']]
             ) : (
@@ -75,8 +54,9 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-	    )
- */
+            )
+        ],
+    ]);
     NavBar::end();
     ?>
 </header>

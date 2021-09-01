@@ -1,21 +1,22 @@
 <?php
 use yii\helpers\Html;
-use app\models\Exposure;
+use app\models\ClassDetails;
 use yii\widgets\ActiveForm;
+use app\models\School;
 
-$this->title = 'Exposure - ' . Html::encode( $model->room ) . ' - ' . Html::encode( $model->period );
+$this->title = 'Class Details - ' . Html::encode( $model->room ) . ' - ' . Html::encode( $model->period );
 
 // Add relevant info to the page title and nav breadcrumbs.
-$this->params[ 'breadcrumbs' ][] = 'Exposures';
+$this->params[ 'breadcrumbs' ][] = 'Class Details';
 
 ?>
 
 <div class="site-exposure">
-	<h1>Class Exposure</h1>
+	<h1>Class Details</h1>
 	<table>
 		<tr>
 			<th>School</th>
-			<td><?php echo Html::encode( $model->school_id ) ?></td>
+			<td><?php echo Html::a( School::findOne( $model->school_id )->name, [ 'schools/view', 'id' => $model->school_id ]  ) ?></td>
 		</tr>
 		<tr>
 			<th>Classroom</th>

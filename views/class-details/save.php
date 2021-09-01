@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 
 <?php
 $form = ActiveForm::begin([
-    'id' => 'exposure-form',
+    'id' => 'class-details-form',
     'options' => ['class' => 'form-vertical'],
 ]) ?>
     <?= $form->field($model, 'school_id')->dropDownList( ArrayHelper::map( School::find()->orderBy( 'name' )->all(), 'id', 'name' ) )->label( 'School' ) ?>

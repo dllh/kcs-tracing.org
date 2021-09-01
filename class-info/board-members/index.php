@@ -25,6 +25,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 			<th>District</th>
 			<th>Phone</th>
 			<th>Address</th>
+			<th>Schools</th>
 		</tr>
 
 		<?php
@@ -41,6 +42,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				<td><?php echo Html::encode( $member->district ); ?></td>
 				<td><?php echo Html::encode( $member->phone ); ?></td>
 				<td><?php echo Html::encode( $member->email ); ?></td>
+				<td>Schools.....</td>
 			</tr>	
 		<?php endforeach; ?>
 	</table>

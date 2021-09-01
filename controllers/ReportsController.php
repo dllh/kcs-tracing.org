@@ -117,8 +117,9 @@ class ReportsController extends Controller
 
         $isGuest = Yii::$app->user->isGuest;
 
-        // List of actions that are available to guests.
-        $publicActionIds = [ 'index', 'view' ];
+	// List of actions that are available to guests.
+	// The 'create' action here is intentional, as we do want public reports.
+        $publicActionIds = [ 'index', 'view', 'create' ];
 
         // Always return true for logged-in users.
         if ( ! $isGuest ) {

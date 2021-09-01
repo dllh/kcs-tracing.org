@@ -18,7 +18,7 @@ $form = ActiveForm::begin([
     'options' => ['class' => 'form-vertical'],
 ]) ?>
     <?= $form->field($model, 'school_id')->widget( Select2::classname(), [ 'language' => 'en', 'options' => [ 'placeholder' => 'Select a school...' ], 'pluginOptions' => [ 'allowClear' => true ], 'data' => $schoolData ] ); ?>
-    <?= $form->field($model, 'class_details_id')->textInput()->label( 'Class Details' ) ?>
+    <?= $form->field($model, 'school_room_period_id')->textInput()->label( 'School Room/Period' ) ?>
     <?= $form->field($model, 'positive_test_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] ) ?>
     <?= $form->field($model, 'zipcode')->textInput()->label( 'Zip Code' ) ?>
 

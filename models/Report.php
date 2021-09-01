@@ -11,7 +11,7 @@ class Report extends ActiveRecord {
 
 	public function rules() {
 		return [
-			[[ 'school_id', 'exposure_id', 'positive_test_date', 'zipcode' ], 'required' ],
+			[[ 'school_id', 'class_details_id', 'positive_test_date', 'zipcode' ], 'required' ],
 		];
 	}
 
@@ -19,7 +19,7 @@ class Report extends ActiveRecord {
 		return $this->hasOne( School::class, [ 'id' => 'school_id' ] );
 	}
 
-	public function getExposure() {
-		return $this->hasOne( Exposure::class, [ 'id' => 'exposure_id' ] );
+	public function getClassDetail() {
+		return $this->hasOne( ClassDetail::class, [ 'id' => 'class_details_id' ] );
 	}
 }

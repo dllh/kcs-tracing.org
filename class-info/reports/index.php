@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\data\Pagination;
 use yii\widgets\LinkPager;
 use app\models\Report;
-use app\models\ClassDetail;
 $this->title = 'Reports';
 
 // Add relevant info to the page title and nav breadcrumbs.
@@ -42,8 +41,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		<?php foreach( $reports as $report ) : ?>
 			<tr>
 				<td><?php echo Html::a( $report->school->name, [ 'schools/view', 'id' => $report->school_id ]); ?></td>
-				<td><?php echo Html::encode( $report->classDetail->room ); ?></td>
-				<td><?php echo Html::encode( $report->classDetail->period ); ?></td>
+				<td><?php echo Html::encode( $report->exposure->room ); ?></td>
+				<td><?php echo Html::encode( $report->exposure->period ); ?></td>
 				<td><?php echo Html::encode( $report->positive_test_date ); ?></td>
 				<td><?php echo Html::encode( $report->zipcode ); ?></td>
 			</tr>	

@@ -3,10 +3,10 @@
 namespace app\models;
 use yii\db\ActiveRecord;
 
-class Exposure extends ActiveRecord {
+class ClassDetail extends ActiveRecord {
 
 	public static function tableName() {
-		return '{{exposures}}';
+		return '{{class_details}}';
 	}
 
 	public function rules() {

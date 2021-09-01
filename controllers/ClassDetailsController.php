@@ -11,9 +11,9 @@ use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
-use app\models\Exposure;
+use app\models\ClassDetail;
 
-class ExposuresController extends Controller
+class ClassDetailsController extends Controller
 {
 	/**
 	 * {@inheritdoc}
@@ -57,22 +57,12 @@ class ExposuresController extends Controller
 		];
 	}
 
-	/**
-	 * Displays exposures page.
-	 *
-	 * @return string
-	 */
 	public function actionIndex() {
 		return $this->render( 'index' );
 	}
 
-	/**
-	 * Displays single exposure page.
-	 *
-	 * @return string
-	 */
 	public function actionView( $id ) {
-		$model = Exposure::findOne( $id );
+		$model = ClassDetail::findOne( $id );
 		if ( $model === null ) {
 			throw new NotFoundHttpException;
 		}
@@ -81,32 +71,23 @@ class ExposuresController extends Controller
 		] );
 	}
 
-	/**
-	 * Creates exposure record.
-	 *
-	 * @return string
-	 */
 	public function actionCreate() {
-		$model = new Exposure();
+		$model = new ClassDetail();
 		if ( $model->load( Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect( [ 'exposures/view', 'id' => $model->id ] );
+			return $this->redirect( [ 'class-detail/view', 'id' => $model->id ] );
 		} else {
 			return $this->render( 'save', [ 'model' => $model ] ); 
 		}
 	}
 
-	/**
-	 * Edits exposure record.
-	 *
-	 */
 	public function actionEdit( $id ) {
-		$model = Exposure::findOne( $id );
+		$model = ClassDetail::findOne( $id );
 		if ( $model === null ) {
 			throw new NotFoundException;
 		}
 
 		if ( $model->load( Yii::$app->request->post()) && $model->save()) {
-			return $this->redirect( [ 'exposures/view', 'id' => $model->id ] );
+			return $this->redirect( [ 'class-detail/view', 'id' => $model->id ] );
 		} else {
 			return $this->render( 'save', [ 'model' => $model ] );
 		}
