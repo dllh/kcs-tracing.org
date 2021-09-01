@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -11,7 +12,7 @@ use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
-use app\models\Exposure;
+use app\models\ClassDetail;
 use app\models\Report;
 
 class ReportsController extends Controller
@@ -142,4 +143,5 @@ class ReportsController extends Controller
         // If nothing else causes us to bail early, return true.
         return true;
     }
+
 }
