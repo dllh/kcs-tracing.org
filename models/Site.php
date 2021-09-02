@@ -16,7 +16,8 @@ class Site extends ActiveRecord {
 		$query = new Query;
 		$data = ArrayHelper::map (
 			$query->select( [ 'DATE( positive_test_date ) AS test_date', 'COUNT(*) AS num' ] )
-				->from( 'reports' )
+	 			->from( 'reports' )
+ 				->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE()' )
 				->groupBy( [ 'test_date' ] )
 				->orderBy( 'test_date ASC' )
 				->all(), 
