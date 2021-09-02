@@ -4,9 +4,9 @@ x Add zip code to reports for maps?
 x Authentication (add restrictions; a login system is in place).
 x Add select2 for school select box for data entry. (Just used a regular select instead. There aren't that many schools.)
 x Report model isn't saving zip code data.
-o Enter report data
-o Style
-o Check for spam (guid in cookie?)
+x Enter report data
+x School district and board member contact
+x Check for spam (guid in cookie?)
 o Total stats
 o Graphs/etc.
 o Also make the data zip code searchable?
@@ -14,4 +14,4 @@ o Show hot spots on the home page with the most cases reported in the last N day
 o Data export in case people want to crunch the data themselves.
 o Add search for schools 
 o Other content (about/etc.)
-o School district and board member contact
+o Style
