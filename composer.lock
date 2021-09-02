@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dc0236ebc2353338dcb38bfb4da0666",
+    "content-hash": "a9cca4a7ac03e8323f0a99ddc4788ebc",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -2215,6 +2215,55 @@
                 "source": "https://github.com/paragonie/random_compat"
             },
             "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "scotthuangzl/yii2-google-chart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ScottHuangZL/yii2-google-chart.git",
+                "reference": "6bd68466030af8a931b34d2ceacf0a498da5b9a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ScottHuangZL/yii2-google-chart/zipball/6bd68466030af8a931b34d2ceacf0a498da5b9a0",
+                "reference": "6bd68466030af8a931b34d2ceacf0a498da5b9a0",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "default-branch": true,
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "scotthuangzl\\googlechart\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Scott Huang",
+                    "email": "zhiliang.huang@gmail.com"
+                }
+            ],
+            "description": "A wraper for google chart",
+            "keywords": [
+                "extension",
+                "google chart",
+                "hzl",
+                "scott huang",
+                "widget",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/ScottHuangZL/yii2-google-chart/issues",
+                "source": "https://github.com/ScottHuangZL/yii2-google-chart"
+            },
+            "time": "2015-06-11T12:13:00+00:00"
         },
         {
             "name": "select2/select2",
@@ -7629,7 +7678,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "scotthuangzl/yii2-google-chart": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use scotthuangzl\googlechart\GoogleChart;
+
 $this->title = 'Knox County Schools DIY Contact Tracing';
 ?>
 <div class="site-index">
@@ -12,6 +14,22 @@ $this->title = 'Knox County Schools DIY Contact Tracing';
     </div>
 
     <div class="body-content">
+
+	<div>
+		<?php
+			echo GoogleChart::widget( 
+				array( 
+					'visualization' => 'LineChart', 
+					'data' => $model->dailyCases,
+					'options' => [
+						'title' => 'Daily Positive Test Cases Reported',
+						'hAxis.title' => 'Day',
+						'height' => 300,
+					] 
+				) 
+			);
+		?>
+	</div>
 
         <div class="row">
             <div class="col-lg-4">
