@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use app\models\School;
 use app\models\BoardMember;
+use app\models\Report;
 use yii\widgets\ActiveForm;
 
 $this->title = 'School - ' . $model->name;
@@ -28,5 +29,29 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 			<td><?php echo Html::a( $model->boardMember->name, [ 'board-members/view', 'id' => $model->board_member_id ]); ?></td>
 		</tr>
 	</table>
+
+	<h2>Positive Case Reports</h2>
+	<?php if ( count( $model->reports ) > 0 ) : ?>
+		<table>
+			<thead>
+				<tr>
+					<th>Room</th>
+					<th>Period</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php foreach ( $model->reports as $report ) : ?>
+				<tr>
+					<td><?php echo Html::encode( $report->room ); ?></td>
+					<td><?php echo Html::encode( $report->period ); ?></td>
+					<td><?php echo Html::encode( $report->positive_test_date ); ?></td>
+				</tr>
+		<?php endforeach; ?>
+			</tbody>
+		</table>
+	<?php else: ?>
+		<p>No positive cases reported so far.</p>
+	<?php endif; ?>
 </div>
 

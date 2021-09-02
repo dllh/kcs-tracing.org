@@ -21,4 +21,8 @@ class BoardMember extends ActiveRecord {
 	public function getSchools() {
                 return $this->hasMany( School::class, [ 'board_member_id' => 'id' ] );
 	}
+
+	public function getReports() {
+		return $this->hasMany( Report::class, [ 'school_id' => 'id' ] )->via( 'schools' );
+	}
 }

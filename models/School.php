@@ -20,5 +20,9 @@ class School extends ActiveRecord {
 
 	public function getBoardMember() {
                 return $this->hasOne( BoardMember::class, [ 'id' => 'board_member_id' ] );
-        }
+	}
+
+	public function getReports() {
+		return $this->hasMany( Report::class, [ 'school_id' => 'id' ] );
+	}
 }

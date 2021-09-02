@@ -36,5 +36,28 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 			</td>
 		</tr>
 	</table>
+        <h2>Positive Case Reports in District</h2>
+        <?php if ( count( $model->reports ) > 0 ) : ?>
+                <table>
+                        <thead>
+                                <tr>
+                                        <th>Room</th>
+                                        <th>Period</th>
+                                        <th>Date</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                <?php foreach ( $model->reports as $report ) : ?>
+                                <tr>
+                                        <td><?php echo Html::encode( $report->room ); ?></td>
+                                        <td><?php echo Html::encode( $report->period ); ?></td>
+                                        <td><?php echo Html::encode( $report->positive_test_date ); ?></td>
+                                </tr>
+                <?php endforeach; ?>
+                        </tbody>
+                </table>
+        <?php else: ?>
+                <p>No positive cases reported so far.</p>
+        <?php endif; ?>
 </div>
 
