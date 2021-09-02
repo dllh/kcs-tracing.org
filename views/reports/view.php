@@ -19,11 +19,11 @@ $this->params[ 'breadcrumbs' ][] = 'Reports';
 		</tr>
 		<tr>
 			<th>Classroom</th>
-			<td><?php echo Html::encode( $model->exposure->room ) ?></td>
+			<td><?php echo Html::encode( $model->room ) ?></td>
 		</tr>
 		<tr>
 			<th>Period</th>
-			<td><?php echo Html::encode( $model->exposure->period ) ?></td>
+			<td><?php echo Html::encode( $model->period ) ?></td>
 		</tr>
 		<tr>
 			<th>Pos. Test Date</th>

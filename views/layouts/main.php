@@ -50,7 +50,7 @@ AppAsset::register($this);
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm();
-	$navBarItems[] = ['label' => 'Class Details', 'url' => ['/class-details']];
+	//$navBarItems[] = ['label' => 'Class Details', 'url' => ['/class-details']];
 	$navBarItems[] = ['label' => 'Reports', 'url' => ['/reports']];
 	//$navBarItems[] = ['label' => 'Log Out', 'url' => ['/user/security/logout']];
 	$navBarItems[] = $logoutForm;

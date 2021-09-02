@@ -2,11 +2,13 @@
 
 namespace app\models;
 use yii\db\ActiveRecord;
-use kartik\builder\TabularForm;
-use kartik\grid\GridView;
-use yii\helpers\ArrayHelper;
-use yii\data\ActiveDataProvider;
-use app\models\ClassDetail;
+use app\models\School;
+use yii\web\Cookie;
+//use kartik\builder\TabularForm;
+//use kartik\grid\GridView;
+//use yii\helpers\ArrayHelper;
+//use yii\data\ActiveDataProvider;
+//use app\models\ClassDetail;
 
 class Report extends ActiveRecord {
 
@@ -16,7 +18,7 @@ class Report extends ActiveRecord {
 
 	public function rules() {
 		return [
-			[[ 'school_id', 'class_details_id', 'positive_test_date', 'zipcode' ], 'required' ],
+			[[ 'school_id', 'room', 'period', 'positive_test_date', 'zipcode', ], 'required' ],
 		];
 	}
 
@@ -24,10 +26,54 @@ class Report extends ActiveRecord {
 		return $this->hasOne( School::class, [ 'id' => 'school_id' ] );
 	}
 
+	public function beforeSave( $insert ) {
+		if ( ! parent::beforeSave( $insert ) ) {
+			return false;
+		}
+
+		// Record the IP address in case we need it in the future to help with spam control.
+		$this->ip_address = \Yii::$app->request->getUserIp();
+
+		// Check cookies for a guid. If not found, generate one. Save guid with the report so that we can use it in the future if needed (along with IP, perhaps) to combat spam reports.
+		$cookies = \Yii::$app->request->cookies;
+		$cookies->readOnly = false;
+		if ( isset( $cookies['guid'] ) ) {
+			$guid = $cookies['guid']->value;
+			error_log( 'guid cookie found: ' . $guid . "\n" );
+		} else {
+			$guid = uniqid( 'kcst_', true );
+			error_log( 'guid check 1 (generated): ' . $guid . "\n" );
+		}
+
+		$this->guid = $guid;
+		$cookie = new \yii\web\Cookie( [
+			'name' => 'guid',
+			'value' => $guid,
+			'expire' => time() +  86400 * 365, // 1 year
+		
+		] );
+
+		$response_cookies = \Yii::$app->response->cookies;
+		$response_cookies->add( $cookie );
+
+		return true;
+	}
+
+
+
+	/*
+	 * Not currently in use. May be useful later for tabular data form display.
+	 */
+	/*
 	public function getClassDetail() {
 		return $this->hasOne( ClassDetail::class, [ 'id' => 'class_details_id' ] );
 	}
+	 */
 
+	/*
+	 * Not currently in use. May be useful later for tabular data form display.
+	 */
+	/*
 	public function getDataProvider() {
 		$query = ClassDetail::find();
 		$provider = new ActiveDataProvider( [
@@ -41,18 +87,27 @@ class Report extends ActiveRecord {
 		return $provider;
 		//$classDetails = $provider->getModels();
 	}
+	 */
 
+	/*
+	 * Not currently in use. May be useful later for tabular data form display.
+	 */
+	/*
 	public function getFormAttributes() {
 	    return [
 	        // primary key column
 	        'id'=>[ // primary key attribute
 	            'type' => TabularForm::INPUT_HIDDEN,
 	            'columnOptions'=>[ 'hidden' => true ]
-	        ],
+		],
+		'school_id' => [
+			'type' => TabularForm::INPUT_DROPDOWN_LIST,
+			'items' => ArrayHelper::map( School::find()->orderBy( 'name' )->asArray()->all(), 'id', 'name' ),
+		],
 	        'room'=>[
-	            'type'=>TabularForm::INPUT_DROPDOWN_LIST,
-	            'items'=>ArrayHelper::map( ClassDetail::find()->distinct()->orderBy('room')->asArray(), 'id', 'room'),
-	            'columnOptions'=>['width'=>'185px']
+			'type'=>TabularForm::INPUT_DROPDOWN_LIST,
+			'items'=>ArrayHelper::map( ClassDetail::find()->distinct( true )->orderBy('room')->asArray(), 'id', 'room'),
+			'columnOptions'=>['width'=>'185px']
 	        ],
 	        'period'=>[
 	            'type'=>TabularForm::INPUT_DROPDOWN_LIST,
@@ -61,4 +116,5 @@ class Report extends ActiveRecord {
 	        ],
 	    ];
 	}
+	 */
 }

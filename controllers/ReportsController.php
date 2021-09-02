@@ -7,12 +7,12 @@ use yii\filters\AccessControl;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\web\Request;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
-use app\models\ClassDetail;
 use app\models\Report;
 
 class ReportsController extends Controller
@@ -113,6 +113,7 @@ class ReportsController extends Controller
 		    return $this->render( 'save', [ 'model' => $model ] ); 
 	    }
     }
+
 
     public function beforeAction( $action ) {
 
