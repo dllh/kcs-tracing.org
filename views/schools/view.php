@@ -63,13 +63,19 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 				</tr>
 			</thead>
 			<tbody>
+		<?php $last_test_date = ''; ?>
 		<?php foreach ( $model->reports as $report ) : ?>
 				<tr>
-					<td><?php echo Html::encode( $report['test_date'] ); ?></td>
+					<?php if ( $last_test_date != $report['test_date'] ): ?>
+                                                <td><?php echo Html::encode( $report['test_date'] ); ?></td>
+                                        <?php else: ?>
+                                                <td> - </td>
+                                        <?php endif; ?>
 					<td><?php echo Html::encode( $report['room'] ); ?></td>
 					<td><?php echo Html::encode( $report['period'] ); ?></td>
 					<td><?php echo Html::encode( $report['num'] ); ?></td>
 				</tr>
+				<?php $last_test_date = $report['test_date']; ?>
 		<?php endforeach; ?>
 			</tbody>
 		</table>
