@@ -18,7 +18,7 @@ class Report extends ActiveRecord {
 
 	public function rules() {
 		return [
-			[[ 'school_id', 'room', 'period', 'positive_test_date', 'zipcode', ], 'required' ],
+			[[ 'school_id', 'room', 'period', 'positive_test_date', ], 'required' ],
 		];
 	}
 

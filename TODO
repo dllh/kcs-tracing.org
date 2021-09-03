@@ -7,12 +7,13 @@ x Report model isn't saving zip code data.
 x Enter report data
 x School district and board member contact
 x Check for spam (guid in cookie?)
-o Total stats
-o Graphs/etc.
-o Also make the data zip code searchable?
-o Show hot spots on the home page with the most cases reported in the last N days.
+x Total stats
+x Graphs/etc.
+- Also make the data zip code searchable? (Decided not to. Most will be searching by school. Could implement this later as a point of interest.)
+- Show hot spots on the home page with the most cases reported in the last N days. (Not really relevant. Most will be interested in school-specific info.)
 o Data export in case people want to crunch the data themselves.
-o Add search for schools 
+o Add search for schools/dates to home page.
+o Make case tables filterable (using DataColumn or GridView?) on the School and Board Member pages?
 o Other content (about/etc.)
 o Style
 o Disable debug mode

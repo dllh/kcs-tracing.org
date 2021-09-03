@@ -25,7 +25,6 @@ $form = ActiveForm::begin([
     <?= $form->field($model, 'room')->textInput()->label( 'Room Number' ) ?> 
     <?= $form->field($model, 'period')->textInput()->label( 'Class Period' ) ?>
     <?= $form->field($model, 'positive_test_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] ) ?>
-    <?= $form->field($model, 'zipcode')->textInput()->label( 'Zip Code' ) ?>
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">

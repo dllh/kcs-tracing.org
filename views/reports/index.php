@@ -44,7 +44,6 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				<td><?php echo Html::encode( $report->room ); ?></td>
 				<td><?php echo Html::encode( $report->period ); ?></td>
 				<td><?php echo Html::encode( $report->positive_test_date ); ?></td>
-				<td><?php echo Html::encode( $report->zipcode ); ?></td>
 			</tr>	
 		<?php endforeach; ?>
 	</table>

@@ -29,10 +29,6 @@ $this->params[ 'breadcrumbs' ][] = 'Reports';
 			<th>Pos. Test Date</th>
 			<td><?php echo Html::encode( $model->positive_test_date ) ?></td>
 		</tr>
-		<tr>
-			<th>Zip Code</th>
-			<td><?php echo Html::encode( $model->zipcode ) ?></td>
-		</tr>
 	</table>
 </div>
 
