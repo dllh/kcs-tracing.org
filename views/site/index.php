@@ -65,21 +65,15 @@ $this->title = 'Knox County Schools DIY Contact Tracing';
 	</div>
 
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
+		<h3>Report</h3>
+		<p>Has your child tested positive for COVID? Share relevant (anonymous) details here.</p>
+                <p><a class="btn btn-outline-secondary" href="/reports/create">Report a Case</a></p>
+            </div>
+            <div class="col-lg-6">
 		<h3>Cases Near You</h3>
-		<p>Show a mini form here for searching by school, zip code, and maybe other fields.</p>
+		<p>Show a mini form here for searching by school, date, and possibly period and room.</p>
                 <p><a class="btn btn-outline-secondary" href="#">Search</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h3>Report</h3>
-		<p>Can we fit the form in here or should we just offer some info and link to a report form?</p>
-                <p><a class="btn btn-outline-secondary" href="#">Report a Case</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h3>Data</h3>
-		<p>Show some graph here and then have the button link to other stats.</p>
-
-                <p><a class="btn btn-outline-secondary" href="">More data</a></p>
             </div>
         </div>
 
