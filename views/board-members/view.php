@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use app\models\BoardMember;
 use yii\widgets\ActiveForm;
+use scotthuangzl\googlechart\GoogleChart;
 
 $this->title = 'Board Member - ' . $model->name;
 
@@ -36,23 +37,67 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 			</td>
 		</tr>
 	</table>
-        <h2>Positive Case Reports in District</h2>
+
+	<h3>Daily Positive Test Cases in This District</h3>
+        <div class="chart" id="total-daily-cases">
+                <?php
+                        echo GoogleChart::widget(
+                                array(
+                                        'visualization' => 'LineChart',
+                                        'data' => $model->dailyCases,
+                                        'options' => [
+                                                'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
+                                                'hAxis.title' => 'Day',
+                                                'height' => 300,
+                                        ]
+                                )
+                        );
+                ?>
+	</div>
+
+
+	<h3>Positive Test Reports by Date, Period, and Room</h3>
+        <b>Instructions</b><br />
+        <p>Find your child's school in the first column. Then find the date you're concerned about in the second column. Then move to the third column and the fourth column to find your child's room and class period. If you see positive case counts for the date in question, it's possible your child has been exposed to COVID. We're showing only the last 30 days worth of data.</p>
+        <p><b>Note:</b>This data is voluntarily reported by parents and is only as accurate as the data they submit. You should use it as a very rough guide but should not treat it as rock-solid, irrefutable data or proof of exposure.</p>
         <?php if ( count( $model->reports ) > 0 ) : ?>
                 <table>
                         <thead>
                                 <tr>
+                                        <th>School</th>
+                                        <th>Date</th>
                                         <th>Room</th>
                                         <th>Period</th>
-                                        <th>Date</th>
+                                        <th>Count</th>
                                 </tr>
                         </thead>
-                        <tbody>
+			<tbody>
+		<?php 
+			$last_school_name = ''; 
+			$last_test_date = '';
+		?>
                 <?php foreach ( $model->reports as $report ) : ?>
-                                <tr>
-                                        <td><?php echo Html::encode( $report->room ); ?></td>
-                                        <td><?php echo Html::encode( $report->period ); ?></td>
-                                        <td><?php echo Html::encode( $report->positive_test_date ); ?></td>
-                                </tr>
+				<tr>
+					<?php if ( $last_school_name != $report['school_name'] ): ?>
+						<td><?php echo Html::encode( $report['school_name'] ); ?></td>
+					<?php else: ?>
+						<td> - </td>
+					<?php endif; ?>
+
+					<?php if ( $last_test_date != $report['test_date'] ): ?>
+                                        	<td><?php echo Html::encode( $report['test_date'] ); ?></td>
+					<?php else: ?>
+						<td> - </td>
+					<?php endif; ?>
+
+                                        <td><?php echo Html::encode( $report['room'] ); ?></td>
+                                        <td><?php echo Html::encode( $report['period'] ); ?></td>
+                                        <td><?php echo Html::encode( $report['num'] ); ?></td>
+				</tr>
+				<?php 
+					$last_school_name = $report['school_name']; 
+					$last_test_date = $report['test_date']; 
+				?>
                 <?php endforeach; ?>
                         </tbody>
                 </table>
