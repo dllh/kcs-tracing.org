@@ -22,7 +22,7 @@ $this->title = 'Knox County Schools DIY Contact Tracing';
 					'visualization' => 'LineChart', 
 					'data' => $model->dailyCases,
 					'options' => [
-						'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
+						'title' => 'Daily Active Test Cases Reported by Parents, Last 30 Days',
 						'hAxis.title' => 'Day',
 						'height' => 300,
 					] 

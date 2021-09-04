@@ -45,25 +45,7 @@ class BoardMember extends ActiveRecord {
         }
 
         // Daily case data formatted in such a way that it'll work with Google Charts via scotthuangzl/yii2-google-chart.
-        public function getDailyCases() {
-                $query = new Query;
-                $data = ArrayHelper::map (
-                        $query->select( [ 'DATE( positive_test_date ) AS test_date', 'COUNT(*) AS num' ] )
-                                ->from( 'reports, schools' )
-                               // ->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
-                        	->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
-                                ->groupBy( [ 'DATE( positive_test_date )' ] )
-                                ->orderBy( 'DATE( positive_test_date ) ASC' )
-                                ->all(),
-                        'test_date', 'num'
-                );
-
-                $returnData = array();
-                array_push( $returnData, [ 'Date', 'Positive Tests' ] );
-                foreach ( $data as $key => $val ) {
-                        array_push( $returnData, [ $key, intVal( $val ) ] );
-                }
-
-                return $returnData;
+	public function getDailyCases() {
+		return Site::getDailyCases( 'reports.school_id = schools.id AND schools.board_member_id = ' . $this->id . ' AND ', 'reports, schools' );
         }
 }

@@ -31,7 +31,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 		</tr>
 	</table>
 
-	<h3>Daily Positive Test Cases at This School</h3>
+	<h3>Daily Active Test Cases at This School</h3>
 	<div class="chart" id="total-daily-cases">
                 <?php
                         echo GoogleChart::widget(
@@ -39,7 +39,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                                         'visualization' => 'LineChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
-                                                'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
+                                                'title' => 'Daily Active Cases Reported by Parents, Last 30 Days',
 						'height' => 300,
 						'pointsVisible' => true,
 						'hAxis' => [
@@ -55,7 +55,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                 ?>
 	</div>
 
-	<h3>Positive Test Reports by Date and Grade</h3>
+	<h3>Active Cases by Date and Grade</h3>
 	<?php if ( count( $model->reports ) > 0 ) : ?>
 		<table>
 			<thead>
@@ -66,18 +66,18 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 				</tr>
 			</thead>
 			<tbody>
-		<?php $last_test_date = ''; ?>
+		<?php $last_date = ''; ?>
 		<?php foreach ( $model->reports as $report ) : ?>
 				<tr>
-					<?php if ( $last_test_date != $report['test_date'] ): ?>
-                                                <td><?php echo Html::encode( $report['test_date'] ); ?></td>
+					<?php if ( $last_date != $report['date'] ): ?> 
+                                                <td><?php echo Html::encode( $report['date'] ); ?></td>
                                         <?php else: ?>
                                                 <td> - </td>
                                         <?php endif; ?>
 					<td><?php echo Html::encode( $report['grade'] ); ?></td>
 					<td><?php echo Html::encode( $report['num'] ); ?></td>
 				</tr>
-				<?php $last_test_date = $report['test_date']; ?>
+				<?php $last_date = $report['date']; ?>
 		<?php endforeach; ?>
 			</tbody>
 		</table>

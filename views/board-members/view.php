@@ -38,7 +38,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 		</tr>
 	</table>
 
-	<h3>Daily Positive Test Cases in This District</h3>
+	<h3>Daily Active Cases in This District</h3>
         <div class="chart" id="total-daily-cases">
                 <?php
                         echo GoogleChart::widget(
@@ -46,7 +46,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
                                         'visualization' => 'LineChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
-						'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
+						'title' => 'Daily Active Cases Reported by Parents, Last 30 Days',
 						'height' => 350,
 						'pointsVisible' => true,
 						'hAxis' => [ 
