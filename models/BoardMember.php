@@ -38,7 +38,7 @@ class BoardMember extends ActiveRecord {
 
                 return $query->select( [ 'schools.name AS school_name, DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )
                         ->from( 'reports, schools' )
-                        ->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
+                        ->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
 			->groupBy( [ 'school_name', 'test_date', 'grade' ] )
                         ->orderBy( 'school_name ASC, test_date DESC, grade, num' )
                         ->all();
@@ -50,8 +50,8 @@ class BoardMember extends ActiveRecord {
                 $data = ArrayHelper::map (
                         $query->select( [ 'DATE( positive_test_date ) AS test_date', 'COUNT(*) AS num' ] )
                                 ->from( 'reports, schools' )
-                               // ->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND school_id = ' . $this->id )
-                        	->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
+                               // ->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
+                        	->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
                                 ->groupBy( [ 'DATE( positive_test_date )' ] )
                                 ->orderBy( 'DATE( positive_test_date ) ASC' )
                                 ->all(),

@@ -9,14 +9,13 @@ use kartik\select2\Select2;
 
 ?>
 
-<h1>Add Report</h1>
-<p>Please fill out this form only <b>once per child per infection</b>. We'd like to know both when your child first demonstrated symptoms and when your child had a positive test date.</p>
+<h1>Save Report</h1>
 
 <?php
 
 $schoolData = ArrayHelper::map( School::find()->orderBy( 'name' )-> all(), 'id', 'name' );
 $form = ActiveForm::begin([
-    'id' => 'report-form',
+    'id' => 'report-search-form',
     'options' => ['class' => 'form-vertical'],
 ]) ?>
 
@@ -27,7 +26,7 @@ $form = ActiveForm::begin([
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
 <?php ActiveForm::end() ?>

@@ -16,4 +16,3 @@ o Add search for schools/dates to home page.
 o Make case tables filterable (using DataColumn or GridView?) on the School and Board Member pages?
 o Other content (about/etc.)
 o Style
-o Disable debug mode

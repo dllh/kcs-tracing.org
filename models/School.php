@@ -31,7 +31,7 @@ class School extends ActiveRecord {
 		
 		return $query->select( [ 'DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )
  			->from( 'reports' )
-			->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND school_id = ' . $this->id )
+			->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
 			->groupBy( [ 'DATE( positive_test_date )', 'grade' ] )
 			->orderBy( 'DATE( positive_test_date ) DESC, grade, num' )
 			->all();
@@ -43,7 +43,7 @@ class School extends ActiveRecord {
                 $data = ArrayHelper::map (
                         $query->select( [ 'DATE( positive_test_date ) AS test_date', 'COUNT(*) AS num' ] )
                                 ->from( 'reports' )
-                                ->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND school_id = ' . $this->id )
+                                ->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
                                 ->groupBy( [ 'DATE( positive_test_date )' ] )
                                 ->orderBy( 'DATE( positive_test_date ) ASC' )
                                 ->all(),
