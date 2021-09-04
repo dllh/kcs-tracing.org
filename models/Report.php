@@ -4,11 +4,6 @@ namespace app\models;
 use yii\db\ActiveRecord;
 use app\models\School;
 use yii\web\Cookie;
-//use kartik\builder\TabularForm;
-//use kartik\grid\GridView;
-//use yii\helpers\ArrayHelper;
-//use yii\data\ActiveDataProvider;
-//use app\models\ClassDetail;
 
 class Report extends ActiveRecord {
 
@@ -18,7 +13,7 @@ class Report extends ActiveRecord {
 
 	public function rules() {
 		return [
-			[[ 'school_id', 'room', 'period', 'positive_test_date', ], 'required' ],
+			[[ 'school_id', 'positive_test_date', 'symptomatic_date', 'grade' ], 'required' ],
 		];
 	}
 
@@ -39,10 +34,8 @@ class Report extends ActiveRecord {
 		$cookies->readOnly = false;
 		if ( isset( $cookies['guid'] ) ) {
 			$guid = $cookies['guid']->value;
-			error_log( 'guid cookie found: ' . $guid . "\n" );
 		} else {
 			$guid = uniqid( 'kcst_', true );
-			error_log( 'guid check 1 (generated): ' . $guid . "\n" );
 		}
 
 		$this->guid = $guid;

@@ -8,6 +8,8 @@ $this->title = 'Report';
 // Add relevant info to the page title and nav breadcrumbs.
 $this->params[ 'breadcrumbs' ][] = 'Reports';
 
+$formatter = \Yii::$app->formatter;
+
 ?>
 
 <div class="site-exposure">
@@ -18,16 +20,16 @@ $this->params[ 'breadcrumbs' ][] = 'Reports';
 			<td><?php echo Html::a( $model->school->name, [ 'schools/view', 'id' => $model->school_id ]); ?></td>
 		</tr>
 		<tr>
-			<th>Classroom</th>
-			<td><?php echo Html::encode( $model->room ) ?></td>
+			<th>Grade Level</th>
+			<td><?php echo Html::encode( $model->grade ) ?></td>
 		</tr>
 		<tr>
-			<th>Period</th>
-			<td><?php echo Html::encode( $model->period ) ?></td>
+			<th>Symptomatic Date</th>
+			<td><?php echo Html::encode( $formatter->asDate( $model->symptomatic_date ), 'date' ) ?></td>
 		</tr>
 		<tr>
-			<th>Pos. Test Date</th>
-			<td><?php echo Html::encode( $model->positive_test_date ) ?></td>
+			<th>Positive Test Date</th>
+			<td><?php echo Html::encode( $formatter->asDate( $model->positive_test_date ), 'date' ) ?></td>
 		</tr>
 	</table>
 </div>

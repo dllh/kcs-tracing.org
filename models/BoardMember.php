@@ -34,8 +34,6 @@ class BoardMember extends ActiveRecord {
 	 */
 
 	public function getReports() {
-                //return $this->hasMany( Report::class, [ 'school_id' => 'id' ] );
-		//select DATE( positive_test_date) as test_date, room, period, COUNT(*) as num FROM reports, schools WHERE reports.school_id = schools.id AND schools.board_member_id = 5 GROUP BY test_date, room, period ORDER BY test_date DESC;
                 $query = new Query;
 
                 return $query->select( [ 'schools.name AS school_name, DATE( positive_test_date ) AS test_date', 'room', 'period', 'COUNT(*) AS num' ] )
@@ -54,8 +52,8 @@ class BoardMember extends ActiveRecord {
                                 ->from( 'reports, schools' )
                                // ->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND school_id = ' . $this->id )
                         	->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
-                                ->groupBy( [ 'test_date' ] )
-                                ->orderBy( 'test_date ASC' )
+                                ->groupBy( [ 'DATE( positive_test_date )' ] )
+                                ->orderBy( 'DATE( positive_test_date ) ASC' )
                                 ->all(),
                         'test_date', 'num'
                 );
@@ -63,7 +61,7 @@ class BoardMember extends ActiveRecord {
                 $returnData = array();
                 array_push( $returnData, [ 'Date', 'Positive Tests' ] );
                 foreach ( $data as $key => $val ) {
-                        array_push( $returnData, [ $key, (int) $val ] );
+                        array_push( $returnData, [ $key, intVal( $val ) ] );
                 }
 
                 return $returnData;

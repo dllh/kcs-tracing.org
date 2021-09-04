@@ -93,7 +93,7 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; @dllh <?= date('Y') ?></p>
+        <p class="float-left"><!-- Copyright or other info? --></p>
     </div>
 </footer>
 

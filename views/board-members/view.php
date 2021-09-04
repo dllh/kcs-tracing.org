@@ -46,9 +46,15 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
                                         'visualization' => 'LineChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
-                                                'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
-                                                'hAxis.title' => 'Day',
-                                                'height' => 300,
+						'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
+						'height' => 350,
+						'hAxis' => [ 
+							'title' => 'Date',
+						],
+						'vAxis' => [ 
+							'viewWindow' => ['min' => 0 ],
+							'format' => '#',
+						],
                                         ]
                                 )
                         );

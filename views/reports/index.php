@@ -24,10 +24,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 	<table>
 		<tr>
 			<th>School</th>
-			<th>Classroom</th>
-			<th>Period</th>
+			<th>Grade</th>
+			<th>Symptomatic Date</th>
 			<th>Pos. Test Date</th>
-			<th>Zip Code</th>
 		</tr>
 
 		<?php
@@ -41,8 +40,8 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		<?php foreach( $reports as $report ) : ?>
 			<tr>
 				<td><?php echo Html::a( $report->school->name, [ 'schools/view', 'id' => $report->school_id ]); ?></td>
-				<td><?php echo Html::encode( $report->room ); ?></td>
-				<td><?php echo Html::encode( $report->period ); ?></td>
+				<td><?php echo Html::encode( $report->grade ); ?></td>
+				<td><?php echo Html::encode( $report->symptomatic_date ); ?></td>
 				<td><?php echo Html::encode( $report->positive_test_date ); ?></td>
 			</tr>	
 		<?php endforeach; ?>
