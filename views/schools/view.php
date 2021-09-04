@@ -40,25 +40,28 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                                         'data' => $model->dailyCases,
                                         'options' => [
                                                 'title' => 'Daily Positive Test Cases Reported by Parents, Last 30 Days',
-                                                'hAxis.title' => 'Day',
-                                                'height' => 300,
+						'height' => 300,
+						'pointsVisible' => true,
+						'hAxis' => [
+                                                        'title' => 'Date',
+                                                ],
+                                                'vAxis' => [
+                                                        'viewWindow' => ['min' => 0 ],
+                                                        'format' => '#',
+                                                ],
                                         ]
                                 )
                         );
                 ?>
 	</div>
 
-	<h3>Positive Test Reports by Date, Period, and Room</h3>
-	<b>Instructions</b><br />
-	<p>Find the date you're concerned about in the first column. Then move to the second column and the third column to find your child's room and class period. If you see positive case counts for the date in question, it's possible your child has been exposed to COVID. We're showing only the last 30 days worth of data.</p>
-	<p><b>Note:</b>This data is voluntarily reported by parents and is only as accurate as the data they submit. You should use it as a very rough guide but should not treat it as rock-solid, irrefutable data or proof of exposure.</p>
+	<h3>Positive Test Reports by Date and Grade</h3>
 	<?php if ( count( $model->reports ) > 0 ) : ?>
 		<table>
 			<thead>
 				<tr>
 					<th>Date</th>
-					<th>Room</th>
-					<th>Period</th>
+					<th>Grade</th>
 					<th>Count</th>
 				</tr>
 			</thead>
@@ -71,8 +74,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                                         <?php else: ?>
                                                 <td> - </td>
                                         <?php endif; ?>
-					<td><?php echo Html::encode( $report['room'] ); ?></td>
-					<td><?php echo Html::encode( $report['period'] ); ?></td>
+					<td><?php echo Html::encode( $report['grade'] ); ?></td>
 					<td><?php echo Html::encode( $report['num'] ); ?></td>
 				</tr>
 				<?php $last_test_date = $report['test_date']; ?>

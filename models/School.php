@@ -29,11 +29,11 @@ class School extends ActiveRecord {
 		//select room, period, DATE( positive_test_date ) AS test_date, COUNT(*) AS num FROM reports WHERE school_id = 1 GROUP BY room, period, test_date ORDER BY test_date DESC, room, num;
 		$query = new Query;
 		
-		return $query->select( [ 'DATE( positive_test_date ) AS test_date', 'room', 'period', 'COUNT(*) AS num' ] )
+		return $query->select( [ 'DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )
  			->from( 'reports' )
 			->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND school_id = ' . $this->id )
-			->groupBy( [ 'test_date', 'room', 'period' ] )
-			->orderBy( 'test_date DESC, room, period, num' )
+			->groupBy( [ 'DATE( positive_test_date )', 'grade' ] )
+			->orderBy( 'DATE( positive_test_date ) DESC, grade, num' )
 			->all();
 	}
 
@@ -44,8 +44,8 @@ class School extends ActiveRecord {
                         $query->select( [ 'DATE( positive_test_date ) AS test_date', 'COUNT(*) AS num' ] )
                                 ->from( 'reports' )
                                 ->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND school_id = ' . $this->id )
-                                ->groupBy( [ 'test_date' ] )
-                                ->orderBy( 'test_date ASC' )
+                                ->groupBy( [ 'DATE( positive_test_date )' ] )
+                                ->orderBy( 'DATE( positive_test_date ) ASC' )
                                 ->all(),
 			'test_date', 'num' 
 		);

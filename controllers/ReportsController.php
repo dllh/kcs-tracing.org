@@ -90,7 +90,12 @@ class ReportsController extends Controller
      */
     public function actionCreate() {
 	    $model = new Report();
-	    if ( $model->load( Yii::$app->request->post()) && $model->save()) {
+	    if ( $model->load( Yii::$app->request->post()) ) {
+		    if ( $model->save() ) {
+		    	Yii::$app->session->setFlash( 'success', "Report successfully created!" );
+		    } else {
+		    	Yii::$app->session->setFlash( 'error', "Could not save record." );
+		    }
 		    return $this->redirect( [ 'reports/view', 'id' => $model->id ] );
 	    } else {
 		    return $this->render( 'save', [ 'model' => $model ] ); 

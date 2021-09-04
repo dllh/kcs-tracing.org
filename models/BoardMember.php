@@ -36,11 +36,11 @@ class BoardMember extends ActiveRecord {
 	public function getReports() {
                 $query = new Query;
 
-                return $query->select( [ 'schools.name AS school_name, DATE( positive_test_date ) AS test_date', 'room', 'period', 'COUNT(*) AS num' ] )
+                return $query->select( [ 'schools.name AS school_name, DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )
                         ->from( 'reports, schools' )
                         ->where( 'positive_test_date BETWEEN ( CURDATE() - INTERVAL 30 DAY ) AND CURDATE() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
-                        ->groupBy( [ 'school_name', 'test_date', 'room', 'period' ] )
-                        ->orderBy( 'school_name ASC, test_date DESC, room, period, num' )
+			->groupBy( [ 'school_name', 'test_date', 'grade' ] )
+                        ->orderBy( 'school_name ASC, test_date DESC, grade, num' )
                         ->all();
         }
 
