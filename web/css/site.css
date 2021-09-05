@@ -123,3 +123,13 @@ a.desc:after {
 	color: #f9ab0e !important;
 	background-color: #072084 !important;
 }
+
+.footer {
+	background-color: #072084 !important;
+	color: #fff !important;
+	font-size: 1.3em !important;
+}
+
+.footer container p.center {
+	text-align: center;
+}
