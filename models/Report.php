@@ -49,6 +49,8 @@ class Report extends ActiveRecord {
 			$guid = uniqid( 'kcst_', true );
 		}
 
+
+		// Generate and save a guid
 		$this->guid = $guid;
 		$cookie = new \yii\web\Cookie( [
 			'name' => 'guid',
@@ -59,6 +61,17 @@ class Report extends ActiveRecord {
 
 		$response_cookies = \Yii::$app->response->cookies;
 		$response_cookies->add( $cookie );
+
+
+		// Set active_case_date to the earlier of the two submitted dates.
+		$positive_test_timestamp = strtotime( $this->positive_test_date );
+		$symptomatic_timestamp = strtotime( $this->symptomatic_date );
+
+		if ( (int) $positive_test_timestamp < (int) $symptomatic_timestamp ) {
+			$this->active_case_date = $this->positive_test_date;
+		} else {
+			$this->active_case_date = $this->symptomatic_date;
+		}
 
 		return true;
 	}
