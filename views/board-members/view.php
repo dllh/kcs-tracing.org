@@ -43,19 +43,20 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
                 <?php
                         echo GoogleChart::widget(
                                 array(
-                                        'visualization' => 'LineChart',
+                                        'visualization' => 'ColumnChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
 						'title' => 'Daily Active Cases Reported by Parents, Last 30 Days',
 						'height' => 350,
 						'pointsVisible' => true,
-						'hAxis' => [ 
-							'title' => 'Date',
-						],
+						//'hAxis' => [ 
+						//	'title' => 'Date',
+						//],
 						'vAxis' => [ 
 							'viewWindow' => ['min' => 0 ],
 							'format' => '#',
 						],
+						'colors' => [ '#62b2af' ],
                                         ]
                                 )
                         );

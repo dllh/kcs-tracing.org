@@ -36,19 +36,17 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                 <?php
                         echo GoogleChart::widget(
                                 array(
-                                        'visualization' => 'LineChart',
+                                        'visualization' => 'ColumnChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
                                                 'title' => 'Daily Active Cases Reported by Parents, Last 30 Days',
-						'height' => 300,
+						'height' => 350,
 						'pointsVisible' => true,
-						'hAxis' => [
-                                                        'title' => 'Date',
-                                                ],
                                                 'vAxis' => [
                                                         'viewWindow' => ['min' => 0 ],
                                                         'format' => '#',
-                                                ],
+						],
+						'colors' => [ '#62b2af' ],
                                         ]
                                 )
                         );
