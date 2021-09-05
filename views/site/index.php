@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
 use scotthuangzl\googlechart\GoogleChart;
 
 $this->title = 'Knox County Schools DIY COVID-19 Dashboard';
@@ -11,6 +12,9 @@ $this->title = 'Knox County Schools DIY COVID-19 Dashboard';
     <div class="jumbotron text-center bg-transparent">
         <h1 class="display-4">KCS DIY COVID-19 Dashboard</h1>
 	<p class="lead">Search for COVID cases in your child's school or report a case of your own.</p>
+	<div id="case-container">
+		<div id="case-count"><p id="cases"><?= Html::encode( $model->caseCount ) ?></p>Cases in the last 30 days</div>
+	</div>
     </div>
 
     <div class="body-content">

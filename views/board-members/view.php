@@ -63,13 +63,13 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 	</div>
 
 
-	<h3>Positive Test Reports by Date and Grade</h3>
+	<h3>Active Cases by Date and Grade</h3>
         <?php if ( count( $model->reports ) > 0 ) : ?>
                 <table>
                         <thead>
                                 <tr>
                                         <th>School</th>
-                                        <th>Pos. Test Date</th>
+                                        <th>Active Case Date</th>
                                         <th>Grade</th>
                                         <th>Count</th>
                                 </tr>
@@ -87,8 +87,8 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 						<td> - </td>
 					<?php endif; ?>
 
-					<?php if ( $last_date != $report['date'] ): ?>
-                                        	<td><?php echo Html::encode( $report['date'] ); ?></td>
+					<?php if ( $last_date != $report['active_date'] ): ?>
+                                        	<td><?php echo Html::encode( $report['active_date'] ); ?></td>
 					<?php else: ?>
 						<td> - </td>
 					<?php endif; ?>
@@ -98,7 +98,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 				</tr>
 				<?php 
 					$last_school_name = $report['school_name']; 
-					$last_date = $report['date']; 
+					$last_date = $report['active_date']; 
 				?>
                 <?php endforeach; ?>
                         </tbody>

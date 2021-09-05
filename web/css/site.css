@@ -139,3 +139,28 @@ a.desc:after {
 	padding: 20px;
 	margin-bottom: 30px;
 }
+
+#case-container {
+	text-align: center;
+}
+#case-count{
+	background-color: #62b2af;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0 25px 0;
+	border-radius: 25px;
+	max-width: 33%;
+	margin: 0 auto;
+	box-shadow: 2px 2px 4px #000;
+	text-shadow: 1px 1px 2px #000;
+}
+
+#cases {
+	font-size: 3.0em;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.container .site-index .jumbotron {
+	/*padding: 1rem, 0.5rem !important;*/
+	padding: 10px, 5px !important;
+}

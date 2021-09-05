@@ -69,20 +69,20 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 		<?php $last_date = ''; ?>
 		<?php foreach ( $model->reports as $report ) : ?>
 				<tr>
-					<?php if ( $last_date != $report['date'] ): ?> 
-                                                <td><?php echo Html::encode( $report['date'] ); ?></td>
+					<?php if ( $last_date != $report['active_date'] ): ?> 
+                                                <td><?php echo Html::encode( $report['active_date'] ); ?></td>
                                         <?php else: ?>
                                                 <td> - </td>
                                         <?php endif; ?>
 					<td><?php echo Html::encode( $report['grade'] ); ?></td>
 					<td><?php echo Html::encode( $report['num'] ); ?></td>
 				</tr>
-				<?php $last_date = $report['date']; ?>
+				<?php $last_date = $report['active_date']; ?>
 		<?php endforeach; ?>
 			</tbody>
 		</table>
 	<?php else: ?>
-		<p>No positive cases reported so far.</p>
+		<p>No active cases reported so far.</p>
 	<?php endif; ?>
 </div>
 

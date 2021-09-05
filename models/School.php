@@ -25,19 +25,35 @@ class School extends ActiveRecord {
 	}
 
 	public function getReports() {
-		return Site::getReportsByGrade( 'school_id = ' . $this->id . ' AND ' );
 		$query = new Query;
 		
-		return $query->select( [ 'DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )
+		return $query->select( [ 'DATE( active_case_date ) AS active_date', 'grade', 'COUNT(*) AS num' ] )
  			->from( 'reports' )
-			->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
-			->groupBy( [ 'DATE( positive_test_date )', 'grade' ] )
-			->orderBy( 'DATE( positive_test_date ) DESC, grade, num' )
+			->where( 'active_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
+			->groupBy( [ 'DATE( active_case_date )', 'grade' ] )
+			->orderBy( 'DATE( active_case_date ) DESC, grade, num' )
 			->all();
 	}
 
 	// Daily case data formatted in such a way that it'll work with Google Charts via scotthuangzl/yii2-google-chart.
 	public function getDailyCases() {
-		return Site::getDailyCases( 'school_id = ' . $this->id . ' AND ');
-        }
+		$query = new Query;
+		
+		$data = ArrayHelper::map( $query->select( [ 'DATE( active_case_date ) AS active_date', 'COUNT(*) AS num' ] )
+ 			->from( 'reports' )
+			->where( 'active_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND school_id = ' . $this->id )
+			->groupBy( [ 'DATE( active_case_date )' ] )
+			->orderBy( 'DATE( active_case_date ) ASC' )
+			->all(),
+			'active_date', 'num'
+		);
+
+		$returnData = array();
+		array_push( $returnData, [ 'Date', 'Active Cases' ] );
+                foreach ( $data as $key => $val ) {
+			array_push( $returnData, [ $key, (int) $val ] );
+                }
+
+                return $returnData;
+	}
 }
