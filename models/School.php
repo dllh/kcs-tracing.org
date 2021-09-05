@@ -26,8 +26,6 @@ class School extends ActiveRecord {
 
 	public function getReports() {
 		return Site::getReportsByGrade( 'school_id = ' . $this->id . ' AND ' );
-		//return $this->hasMany( Report::class, [ 'school_id' => 'id' ] );
-		//select room, period, DATE( positive_test_date ) AS test_date, COUNT(*) AS num FROM reports WHERE school_id = 1 GROUP BY room, period, test_date ORDER BY test_date DESC, room, num;
 		$query = new Query;
 		
 		return $query->select( [ 'DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )

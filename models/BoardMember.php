@@ -27,21 +27,8 @@ class BoardMember extends ActiveRecord {
                 return $this->hasMany( School::class, [ 'board_member_id' => 'id' ] );
 	}
 
-	/*
 	public function getReports() {
-		return $this->hasMany( Report::class, [ 'school_id' => 'id' ] )->via( 'schools' );
-	}
-	 */
-
-	public function getReports() {
-                $query = new Query;
-
-                return $query->select( [ 'schools.name AS school_name, DATE( positive_test_date ) AS test_date', 'grade', 'COUNT(*) AS num' ] )
-                        ->from( 'reports, schools' )
-                        ->where( 'positive_test_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
-			->groupBy( [ 'school_name', 'test_date', 'grade' ] )
-                        ->orderBy( 'school_name ASC, test_date DESC, grade, num' )
-                        ->all();
+		return Site::getReportsBySchoolGrade( 'reports.school_id = schools.id AND schools.board_member_id = ' . $this->id . ' AND ', 'reports, schools', [ 'schools.id AS school_id', 'schools.name AS school_name', 'grade', 'DATE( symptomatic_date ) AS symp', 'DATE( positive_test_date ) as test', 'IF( symptomatic_date < positive_test_date, "symp", "test" ) AS earliest_date' ] );
         }
 
         // Daily case data formatted in such a way that it'll work with Google Charts via scotthuangzl/yii2-google-chart.

@@ -77,18 +77,18 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 			<tbody>
 		<?php 
 			$last_school_name = ''; 
-			$last_test_date = '';
+			$last_date = '';
 		?>
                 <?php foreach ( $model->reports as $report ) : ?>
 				<tr>
 					<?php if ( $last_school_name != $report['school_name'] ): ?>
-						<td><?php echo Html::encode( $report['school_name'] ); ?></td>
+						<td><?php echo Html::a( $report['school_name'], [ 'schools/view', 'id' => (int) $report['school_id'] ] ); ?></td>
 					<?php else: ?>
 						<td> - </td>
 					<?php endif; ?>
 
-					<?php if ( $last_test_date != $report['test_date'] ): ?>
-                                        	<td><?php echo Html::encode( $report['test_date'] ); ?></td>
+					<?php if ( $last_date != $report['date'] ): ?>
+                                        	<td><?php echo Html::encode( $report['date'] ); ?></td>
 					<?php else: ?>
 						<td> - </td>
 					<?php endif; ?>
@@ -98,7 +98,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 				</tr>
 				<?php 
 					$last_school_name = $report['school_name']; 
-					$last_test_date = $report['test_date']; 
+					$last_date = $report['date']; 
 				?>
                 <?php endforeach; ?>
                         </tbody>
