@@ -4,12 +4,12 @@
 
 use scotthuangzl\googlechart\GoogleChart;
 
-$this->title = 'Knox County Schools DIY Contact Tracing';
+$this->title = 'Knox County Schools DIY COVID-19 Dashboard';
 ?>
 <div class="site-index">
 
     <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">KCS Parent Contact Tracing</h1>
+        <h1 class="display-4">KCS DIY COVID-19 Dashboard</h1>
 	<p class="lead">Search for COVID cases in your child's school or report a case of your own.</p>
     </div>
 

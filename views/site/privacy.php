@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Your privacy and the privacy of your children is important. We collect minimal information in order to make this site function, and we'll share more about that information below. We'll also share a bit about some of the risks associated with using the site. We do believe the risks are small.</p>
 
     <h3>Things We Collect and Why</h3>
-    <p><b>Any data you select via forms or type in yourself.</b><br />We collect this as it's crucial to our contact tracing efforts. Without this data, there is no site.</p>
+    <p><b>Any data you select via forms or type in yourself.</b><br />We collect this as it's crucial to our dashboard creation efforts. Without this data, there is no site.</p>
 
     <p><b>Your IP address.</b><br />We collect this solely because it can be useful in helping reduce the risk of duplicate or spam submissions.</p>
 
