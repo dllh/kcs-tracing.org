@@ -96,7 +96,7 @@ class ReportsController extends Controller
 		    } else {
 		    	Yii::$app->session->setFlash( 'error', "Could not save record." );
 		    }
-		    return $this->redirect( [ 'reports/view', 'id' => $model->id ] );
+		    return $this->redirect( [ 'reports/view', 'id' => $model->id, 'saved' => 1 ] );
 	    } else {
 		    return $this->render( 'save', [ 'model' => $model ] ); 
 	    }
