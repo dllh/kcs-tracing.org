@@ -41,8 +41,8 @@ AppAsset::register($this);
     $navBarItems[] = ['label' => 'Schools', 'url' => ['/schools']];
     $navBarItems[] = ['label' => 'School Board', 'url' => ['/board-members']];
     $navBarItems[] = ['label' => 'Add Report', 'url' => ['/reports/create']];
+    $navBarItems[] = ['label' => 'About', 'url' => ['/site/about']];
     $navBarItems[] = ['label' => 'Privacy', 'url' => ['/site/privacy']];
-    //$navBarItems[] = ['label' => 'About', 'url' => ['/site/about']];
     //$navBarItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
     if ( ! Yii::$app->user->isGuest ) {
 	$logoutForm = Html::beginForm(['/user/security/logout'], 'post', ['class' => 'form-inline'])
