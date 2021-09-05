@@ -72,7 +72,7 @@ $this->title = 'Knox County Schools DIY Contact Tracing';
             </div>
             <div class="col-lg-6">
 		<h3>Cases Near You</h3>
-		<p>Show a mini form here for searching by school, date, and possibly period and room.</p>
+		<p>Looking for reports at your child's school? Search for recent cases here.</p>
                 <p><a class="btn btn-outline-secondary" href="#">Search</a></p>
             </div>
         </div>

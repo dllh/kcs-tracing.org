@@ -14,6 +14,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
 use app\models\Report;
+use app\models\Search;
 
 class ReportsController extends Controller
 {
@@ -104,6 +105,29 @@ class ReportsController extends Controller
     }
 
     /**
+     * Searches reports.
+     *
+     * @return string
+     */
+    public function actionSearch() {
+	    $searchModel = new Search();
+
+	    $dataProvider = $searchModel->search( Yii::$app->request->get(), [
+		    'pagination' => [ 'pageSize' => 25,  ],
+		    'sort'       => [
+			    'defaultOrder' => [
+				    'positive_test_date' => SORT_DESC, // Not really sure about this, but I do need a default.
+			    ],
+		    ],
+	    ] );
+	    return $this->render( 'search', [
+		    'dataProvider' => $dataProvider,
+		    'searchModel'  => $searchModel,
+		    'hasSearch'    => ! empty( Yii::$app->request->get() ), // Determines whether we show the results grid or not.
+	    ]);
+    }
+
+    /**
      * Edits report record.
      *
      */
@@ -127,7 +151,7 @@ class ReportsController extends Controller
 
 	// List of actions that are available to guests.
 	// The 'create' action here is intentional, as we do want public reports.
-        $publicActionIds = [ 'index', 'view', 'create' ];
+        $publicActionIds = [ 'index', 'view', 'create', 'search' ];
 
         // Always return true for logged-in users.
         if ( ! $isGuest ) {

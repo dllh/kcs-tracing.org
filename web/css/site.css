@@ -133,3 +133,9 @@ a.desc:after {
 .footer container p.center {
 	text-align: center;
 }
+
+#report-search-form {
+	border: 1px solid #072084;
+	padding: 20px;
+	margin-bottom: 30px;
+}
