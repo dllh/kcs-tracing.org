@@ -14,7 +14,18 @@ class Report extends ActiveRecord {
 	public function rules() {
 		return [
 			[[ 'school_id', 'positive_test_date', 'symptomatic_date', 'grade' ], 'required' ],
+			[['positive_test_date', 'symptomatic_date'], 'validatePastDate' ],
 		];
+	}
+
+	
+	public function validatePastDate( $attribute, $params ) {
+		$date = new \DateTime();
+		$maxAgeDate = date_format( $date, 'Y-m-d' );
+		
+		if ( $this->$attribute > $maxAgeDate ) {
+			$this->addError( $attribute, 'Please pick a date that is not in the future.' );
+		}
 	}
 
 	public function getSchool() {
