@@ -82,3 +82,44 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/* Custom */
+.bg-dark {
+	background-color: #072084 !important;
+}
+
+.navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .nav-link.active {
+    color: #f9ab0e;
+}
+
+.container a:link {
+	color: #62b2af;
+}
+.container a:visited {
+	color: #62b2af;
+}
+.container a:hover {
+	color: #072084;
+}
+.container a:active {
+	color: #f9ab0e;
+}
+
+.container a.navbar-brand {
+    color: #f9ab0e;
+}
+
+.btn {
+	background-color: #f9ab0e;
+	color: #072084 !important;
+}
+
+.btn:hover {
+	color: #f9ab0e !important;
+	background-color: #072084 !important;
+}
+
+.pagination li.active {
+	color: #f9ab0e !important;
+	background-color: #072084 !important;
+}

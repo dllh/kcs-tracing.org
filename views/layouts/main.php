@@ -38,8 +38,8 @@ AppAsset::register($this);
 
     $navBarItems = [];
     $navBarItems[] = ['label' => 'Home', 'url' => ['/site/index']];
-    $navBarItems[] = ['label' => 'Schools', 'url' => ['/schools']];
-    $navBarItems[] = ['label' => 'School Board', 'url' => ['/board-members']];
+    $navBarItems[] = ['label' => 'Schools', 'url' => ['/schools/index']];
+    $navBarItems[] = ['label' => 'School Board', 'url' => ['/board-members/index']];
     $navBarItems[] = ['label' => 'Add Report', 'url' => ['/reports/create']];
     $navBarItems[] = ['label' => 'About', 'url' => ['/site/about']];
     $navBarItems[] = ['label' => 'Privacy', 'url' => ['/site/privacy']];
@@ -51,9 +51,7 @@ AppAsset::register($this);
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm();
-	//$navBarItems[] = ['label' => 'Class Details', 'url' => ['/class-details']];
 	$navBarItems[] = ['label' => 'Reports', 'url' => ['/reports']];
-	//$navBarItems[] = ['label' => 'Log Out', 'url' => ['/user/security/logout']];
 	$navBarItems[] = $logoutForm;
     } else {
     	$navBarItems[] = ['label' => 'Admin Login', 'url' => ['/user/security/login']];
