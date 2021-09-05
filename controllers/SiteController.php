@@ -94,4 +94,14 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Displays privacy page.
+     *
+     * @return string
+     */
+    public function actionPrivacy()
+    {
+        return $this->render('privacy');
+    }
 }
