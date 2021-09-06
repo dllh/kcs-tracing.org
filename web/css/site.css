@@ -134,7 +134,7 @@ a.desc:after {
 	text-align: center;
 }
 
-#report-search-form {
+#report-search-form.searched{
 	border: 1px solid #072084;
 	padding: 20px;
 	margin-bottom: 30px;

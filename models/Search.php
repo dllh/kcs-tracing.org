@@ -7,38 +7,49 @@ use app\models;
 
 class Search extends ActiveRecord {
 
+	public $start_date;
+	public $end_date;
+
 	public static function tableName() {
 		return '{{reports}}';
 	}
 
 	public function search( $params ) {
 		$where = [];
+		$filterWhere = [];
 
-		$params = $params['Search'];
+
+		if ( isset( $params['Search'] ) ) {
+			$params = $params['Search'];
+		} else {
+			return [];
+		}
 
 		if ( isset( $params['school_id'] ) && (int) $params['school_id'] > 0 ) {
-			$where['school_id']  = (int) $params['school_id'];
+			$filterWhere['school_id']  = (int) $params['school_id'];
 			$this->school_id = (int) $params['school_id'];
 		}
 
 		// TODO: Proper validation of grade based on our whitelist.
 		if ( isset( $params['grade'] ) && ! empty( $params['grade'] ) ) {
-			$where['grade']  = (int) $params['grade'];
-			$this->grade = (int) $params['grade'];
+			$filterWhere['grade']  = $params['grade'];
+			$this->grade = $params['grade'];
 		}
 
-		if ( isset( $params['positive_test_date'] ) && ! empty( $params['positive_test_date'] ) ) {
-			$where['positive_test_date']  = (int) $params['positive_test_date'];
+		if ( isset( $params['start_date'] ) && ! empty( $params['start_date'] ) ) {
+			$this->start_date = $params['start_date'];
 		}
 
-		if ( isset( $params['symptomatic_date'] ) && ! empty( $params['symptomatic_date'] ) ) {
-			$where['symptomatic_date']  = (int) $params['symptomatic_date'];
+		if ( isset( $params['end_date'] ) && ! empty( $params['end_date'] ) ) {
+			$this->end_date = $params['end_date'];
 		}
 
 		$query = Report::find()
 			->joinWith( [ 'school' ] )
 			->where ( 'schools.id = reports.school_id' )
-			->andFilterWhere( $where );
+			->andWhere( $where )
+			->andFilterWhere( $filterWhere )
+			->andFilterWhere( [ 'between', 'active_case_date', $params['start_date'], $params['end_date'] ] );
 
 		$dataProvider = new ActiveDataProvider( [
 			'query' => $query,
@@ -60,12 +71,10 @@ class Search extends ActiveRecord {
 	/*
 	public function rules() {
 		return [
-			[[ 'school_id', 'positive_test_date', 'symptomatic_date', 'grade' ], 'required' ],
-			[['positive_test_date', 'symptomatic_date'], 'validatePastDate' ],
+			[['start_date', 'end_date'], 'validatePastDate' ],
 		];
 	}
 
-	
 	public function validatePastDate( $attribute, $params ) {
 		$date = new \DateTime();
 		$maxAgeDate = date_format( $date, 'Y-m-d' );
