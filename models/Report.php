@@ -63,15 +63,18 @@ class Report extends ActiveRecord {
 		$response_cookies->add( $cookie );
 
 
-		// Set active_case_date to the earlier of the two submitted dates.
+		// Set new_case_date to the earlier of the two submitted dates.
 		$positive_test_timestamp = strtotime( $this->positive_test_date );
 		$symptomatic_timestamp = strtotime( $this->symptomatic_date );
 
 		if ( (int) $positive_test_timestamp < (int) $symptomatic_timestamp ) {
-			$this->active_case_date = $this->positive_test_date;
+			$this->new_case_date = $this->positive_test_date;
 		} else {
-			$this->active_case_date = $this->symptomatic_date;
+			$this->new_case_date = $this->symptomatic_date;
 		}
+
+		// Set active_case_date to new_case_date plus 10 days.
+		$this->active_case_date = date( 'Y-m-d H:i:s', strtotime( $this->new_case_date ) + 10 * 86400 );
 
 		return true;
 	}

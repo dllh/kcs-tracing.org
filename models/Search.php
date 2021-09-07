@@ -49,7 +49,7 @@ class Search extends ActiveRecord {
 			->where ( 'schools.id = reports.school_id' )
 			->andWhere( $where )
 			->andFilterWhere( $filterWhere )
-			->andFilterWhere( [ 'between', 'active_case_date', $params['start_date'], $params['end_date'] ] );
+			->andFilterWhere( [ 'between', 'new_case_date', $params['start_date'], $params['end_date'] ] );
 
 		$dataProvider = new ActiveDataProvider( [
 			'query' => $query,

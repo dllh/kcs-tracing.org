@@ -38,7 +38,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 		</tr>
 	</table>
 
-	<h3>Daily Active Cases in This District</h3>
+	<h3>Daily New Cases in This District</h3>
         <div class="chart" id="total-daily-cases">
                 <?php
                         echo GoogleChart::widget(
@@ -46,7 +46,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
                                         'visualization' => 'ColumnChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
-						'title' => 'Daily Active Cases Reported by Parents, Last 30 Days',
+						'title' => 'Daily New Cases Reported by Parents, Last 30 Days',
 						'height' => 350,
 						'pointsVisible' => true,
 						//'hAxis' => [ 
@@ -64,13 +64,13 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 	</div>
 
 
-	<h3>Active Cases by Date and Grade</h3>
+	<h3>New Cases by Date and Grade</h3>
         <?php if ( count( $model->reports ) > 0 ) : ?>
                 <table>
                         <thead>
                                 <tr>
                                         <th>School</th>
-                                        <th>Active Case Date</th>
+                                        <th>New Case Date</th>
                                         <th>Grade</th>
                                         <th>Count</th>
                                 </tr>
@@ -88,8 +88,8 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 						<td> - </td>
 					<?php endif; ?>
 
-					<?php if ( $last_date != $report['active_date'] ): ?>
-                                        	<td><?php echo Html::encode( $report['active_date'] ); ?></td>
+					<?php if ( $last_date != $report['new_case_date'] ): ?>
+                                        	<td><?php echo Html::encode( $report['new_case_date'] ); ?></td>
 					<?php else: ?>
 						<td> - </td>
 					<?php endif; ?>
@@ -99,7 +99,7 @@ $this->params[ 'breadcrumbs' ][] = 'Board Members';
 				</tr>
 				<?php 
 					$last_school_name = $report['school_name']; 
-					$last_date = $report['active_date']; 
+					$last_date = $report['new_case_date']; 
 				?>
                 <?php endforeach; ?>
                         </tbody>

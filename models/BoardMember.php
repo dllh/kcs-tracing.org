@@ -31,11 +31,11 @@ class BoardMember extends ActiveRecord {
 
 		$query = new Query;
 
-                return $query->select( [ 'school_id', 'schools.name AS school_name', 'DATE( active_case_date ) AS active_date', 'grade', 'COUNT(*) AS num' ] )
+                return $query->select( [ 'school_id', 'schools.name AS school_name', 'DATE( new_case_date ) AS new_case_date', 'grade', 'COUNT(*) AS num' ] )
                         ->from( 'reports, schools' )
-                        ->where( 'active_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
-                        ->groupBy( [ 'school_id', 'school_name', 'DATE( active_case_date )', 'grade' ] )
-                        ->orderBy( 'school_name, DATE( active_case_date ) DESC, grade, num' )
+                        ->where( 'new_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
+                        ->groupBy( [ 'school_id', 'school_name', 'DATE( new_case_date )', 'grade' ] )
+                        ->orderBy( 'school_name, DATE( new_case_date ) DESC, grade, num' )
                         ->all();
         }
 
@@ -43,17 +43,17 @@ class BoardMember extends ActiveRecord {
 	public function getDailyCases() {
                 $query = new Query;
 
-                $data = ArrayHelper::map( $query->select( [ 'DATE( active_case_date ) AS active_date', 'COUNT(*) AS num' ] )
+                $data = ArrayHelper::map( $query->select( [ 'DATE( new_case_date ) AS new_case_date', 'COUNT(*) AS num' ] )
                         ->from( 'reports, schools' )
-                        ->where( 'active_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
-                        ->groupBy( [ 'DATE( active_case_date )' ] )
-                        ->orderBy( 'DATE( active_case_date ) ASC' )
+                        ->where( 'new_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW() AND reports.school_id = schools.id AND schools.board_member_id = ' . $this->id )
+                        ->groupBy( [ 'DATE( new_case_date )' ] )
+                        ->orderBy( 'DATE( new_case_date ) ASC' )
                         ->all(),
-                        'active_date', 'num'
+                        'new_case_date', 'num'
                 );
 
                 $returnData = array();
-                array_push( $returnData, [ 'Date', 'Active Cases' ] );
+                array_push( $returnData, [ 'Date', 'New Cases' ] );
                 foreach ( $data as $key => $val ) {
                         array_push( $returnData, [ $key, (int) $val ] );
                 }

@@ -31,7 +31,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 		</tr>
 	</table>
 
-	<h3>Daily Active Test Cases at This School</h3>
+	<h3>Daily New Cases at This School</h3>
 	<div class="chart" id="total-daily-cases">
                 <?php
                         echo GoogleChart::widget(
@@ -39,7 +39,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                                         'visualization' => 'ColumnChart',
                                         'data' => $model->dailyCases,
                                         'options' => [
-                                                'title' => 'Daily Active Cases Reported by Parents, Last 30 Days',
+                                                'title' => 'Daily New Cases Reported by Parents, Last 30 Days',
 						'height' => 350,
 						'pointsVisible' => true,
                                                 'vAxis' => [
@@ -53,7 +53,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                 ?>
 	</div>
 
-	<h3>Active Cases by Date and Grade</h3>
+	<h3>New Cases by Date and Grade</h3>
 	<?php if ( count( $model->reports ) > 0 ) : ?>
 		<table>
 			<thead>

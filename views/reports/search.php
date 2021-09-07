@@ -50,7 +50,7 @@ if ( $hasSearch ) {
 		'columns' => [
 			'school.name',
 			'grade',
-			'active_case_date',	
+			'new_case_date',	
 		],
 	]);
 }
