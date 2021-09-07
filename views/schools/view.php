@@ -33,7 +33,9 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 
 	<h3>Daily New Cases at This School</h3>
 	<div class="chart" id="total-daily-cases">
-                <?php
+	<?php
+		// Look for a count > 1 here because the first array item is a header row.
+                if ( count( $model->dailyCases ) > 1 ) {
                         echo GoogleChart::widget(
                                 array(
                                         'visualization' => 'ColumnChart',
@@ -49,7 +51,10 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 						'colors' => [ '#62b2af' ],
                                         ]
                                 )
-                        );
+			);
+		} else {
+			echo '<p>No data to display yet.</p>';
+		}
                 ?>
 	</div>
 

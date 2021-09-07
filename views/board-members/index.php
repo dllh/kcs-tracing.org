@@ -28,7 +28,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 		</tr>
 
 		<?php
-			$query = BoardMember::find()->orderBy( [ 'name' => SORT_ASC ] );
+			$query = BoardMember::find()->orderBy( [ 'district' => SORT_ASC ] );
                         $count = $query->count();
                         $pagination = new Pagination( [ 'pageSize' => 20, 'totalCount' => $count ] );
                         $boardMembers = $query->offset( $pagination->offset )
@@ -40,7 +40,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 				<td><?php echo Html::a( $member->name, [ 'board-members/view', 'id' => $member->id ]); ?></td>
 				<td><?php echo Html::encode( $member->district ); ?></td>
 				<td><?php echo Html::encode( $member->phone ); ?></td>
-				<td><?php echo Html::encode( $member->email ); ?></td>
+				<td><?php echo Html::a( $member->email, 'mailto:' . $member->email ); ?></td>
 			</tr>	
 		<?php endforeach; ?>
 	</table>

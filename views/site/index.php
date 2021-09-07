@@ -20,7 +20,9 @@ $this->title = 'Knox County Schools DIY COVID-19 Dashboard';
     <div class="body-content">
 
 	<div class="chart" id="total-daily-cases">
-		<?php
+	<?php
+		// Look for a count > 1 here because the first array item is a header row.
+                if ( count( $model->dailyCases ) > 1 ) {
 			echo GoogleChart::widget( 
 				array( 
 					'visualization' => 'ColumnChart', 
@@ -32,6 +34,7 @@ $this->title = 'Knox County Schools DIY COVID-19 Dashboard';
 					] 
 				) 
 			);
+		}
 		?>
 	</div>
 
