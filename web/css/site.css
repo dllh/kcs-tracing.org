@@ -175,3 +175,11 @@ a.desc:after {
 	border: 1px solid #072084;
 	color: #072084 !important;
 }
+
+.field-report-symptomatic_date {
+	display: none;
+}
+
+.field-report-symptomatic_date.show {
+	display: block;
+}

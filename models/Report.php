@@ -13,7 +13,7 @@ class Report extends ActiveRecord {
 
 	public function rules() {
 		return [
-			[[ 'school_id', 'positive_test_date', 'symptomatic_date', 'grade' ], 'required' ],
+			[[ 'school_id', 'positive_test_date', 'grade' ], 'required' ],
 			[['positive_test_date', 'symptomatic_date'], 'validatePastDate' ],
 		];
 	}
@@ -62,6 +62,17 @@ class Report extends ActiveRecord {
 		$response_cookies = \Yii::$app->response->cookies;
 		$response_cookies->add( $cookie );
 
+error_log( print_r( $this, true ) );
+		// Look for the "symptomatic" timestamp and, if not present, just use the positive test timestamp
+		// for determining the new case date.
+		$post = \Yii::$app->request->post();
+		error_log( print_r( $post, true ) );
+		if ( isset( $post['Report']['symptomatic'] ) && $post['Report']['symptomatic'] == 'asymptomatic' ) {
+			$this->symptomatic_date = $this->positive_test_date;
+			$this->symptomatic = 0;
+		} else{
+			$this->symptomatic = 1;
+		}
 
 		// Set new_case_date to the earlier of the two submitted dates.
 		$positive_test_timestamp = strtotime( $this->positive_test_date );

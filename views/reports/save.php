@@ -39,6 +39,7 @@ foreach ( $schools as $school ) {
 <?php 
 	echo 'var schoolToTypeMap = ' . Json::encode( $schoolToTypeMap ) . ";\n"; 
 	echo 'var validGradesMap = ' . Json::encode( $validGrades ) . ";\n"; 
+	
 ?>
 </script>
 
@@ -71,8 +72,7 @@ $form = ActiveForm::begin([
 					var newOption = new Option( grade, grade, false, false);
 					$("#report-grade" ).append( newOption ).trigger( "change" );
 				} );
-
-			 }'
+			 }',
 		],
 		'data' => $schoolData,
 	     ]
@@ -81,6 +81,15 @@ $form = ActiveForm::begin([
 
 
     <?= $form->field($model, 'grade')->widget( Select2::classname(), [ 'language' => 'en', 'options' => [ 'placeholder' => 'Select a grade level...' ], 'pluginOptions' => [ 'allowClear' => true ], 'data' => [ '11' => 11, '12' => 12 ] ] )->label( 'Student\'s Grade Level' ); ?>
+
+    <?= $form->field( $model, 'symptomatic' )
+	     ->checkbox( [
+		     	'check'   => 'symptomatic',
+			'uncheck' => 'asymptomatic',
+			'label'   => '<span>Check this box if your child exhibited symptoms of COVID-19.</span>',
+	     ] )
+    ?>
+
     <?= $form->field($model, 'symptomatic_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] )->label( 'Symptom Onset Date' ) ?>
     <?= $form->field($model, 'positive_test_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] )->label( 'Date of Positive Test (when was the test <b>given</b>?)' ) ?>
 
@@ -89,4 +98,19 @@ $form = ActiveForm::begin([
             <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
+
+	     
+	     
 <?php ActiveForm::end() ?>
+
+    <script type="text/javascript">
+	     // If the "symptomatic" checkbox is ticked, show the symptomatic date field. 
+	     document.getElementById( 'report-symptomatic' ).onclick = function ( event ) {
+		     if ( true === event.target.checked ) {
+			     document.getElementsByClassName( 'field-report-symptomatic_date' )[0].classList.add( 'show' );
+		     } else {
+			     document.getElementsByClassName( 'field-report-symptomatic_date' )[0].classList.remove( 'show' );
+		     }
+	     } 
+
+    </script>
