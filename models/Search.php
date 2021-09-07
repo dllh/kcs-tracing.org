@@ -68,44 +68,4 @@ class Search extends ActiveRecord {
                 return $this->hasOne( School::class, [ 'id' => 'school_id' ] );
 	}
 
-	/*
-	public function rules() {
-		return [
-			[['start_date', 'end_date'], 'validatePastDate' ],
-		];
-	}
-
-	public function validatePastDate( $attribute, $params ) {
-		$date = new \DateTime();
-		$maxAgeDate = date_format( $date, 'Y-m-d' );
-		
-		if ( $this->$attribute > $maxAgeDate ) {
-			$this->addError( $attribute, 'Please pick a date that is not in the future.' );
-		}
-	}
-
-	public function getFormAttributes() {
-	    return [
-	        // primary key column
-	        'id'=>[ // primary key attribute
-	            'type' => TabularForm::INPUT_HIDDEN,
-	            'columnOptions'=>[ 'hidden' => true ]
-		],
-		'school_id' => [
-			'type' => TabularForm::INPUT_DROPDOWN_LIST,
-			'items' => ArrayHelper::map( School::find()->orderBy( 'name' )->asArray()->all(), 'id', 'name' ),
-		],
-	        'room'=>[
-			'type'=>TabularForm::INPUT_DROPDOWN_LIST,
-			'items'=>ArrayHelper::map( ClassDetail::find()->distinct( true )->orderBy('room')->asArray(), 'id', 'room'),
-			'columnOptions'=>['width'=>'185px']
-	        ],
-	        'period'=>[
-	            'type'=>TabularForm::INPUT_DROPDOWN_LIST,
-	            'items'=>ArrayHelper::map( ClassDetail::find()->distinct()->orderBy('period')->asArray()->all(), 'id', 'period'),
-	            'columnOptions'=>['width'=>'185px']
-	        ],
-	    ];
-	}
-	 */
 }
