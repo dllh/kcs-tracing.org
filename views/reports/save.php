@@ -8,6 +8,8 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use kartik\select2\Select2;
 
+$this->title = 'Report a COVID-19 Case';
+
 /*
  * The code just below is used for some logic that lets us map grade levels to
  * school by classifying each school via its "type" column as a type of school ("high,"
@@ -26,8 +28,12 @@ foreach ( $schools as $school ) {
 }
 ?>
 
-<h1>Add Report</h1>
+<h1>Add COVID-19 Case Report</h1>
+
+<div id="no-duplicate" class="alert"><b>Note:</b> If you reported your child's confirmed case of COVID on <a href="https://docs.google.com/forms/d/e/1FAIpQLSdnh2AZeRI6Np01H84mjMOnUZb1v3D4VqFVZ-Zv_7DM6U6veg/viewform">this Google Form</a>, that report has been transferred to this tool, so please do not create a duplicate report here.</div>
+
 <p>Please fill out this form only <b>once per child per infection</b>. We'd like to know both when your child first demonstrated symptoms and when your child had a positive test date.</p>
+
 
 <script type="text/javascript">
 <?php 

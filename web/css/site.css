@@ -169,3 +169,9 @@ a.desc:after {
 	/*padding: 1rem, 0.5rem !important;*/
 	padding: 10px, 5px !important;
 }
+
+#no-duplicate {
+	background-color: #f9ab0e;
+	border: 1px solid #072084;
+	color: #072084 !important;
+}
