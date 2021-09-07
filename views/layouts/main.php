@@ -39,10 +39,11 @@ AppAsset::register($this);
     $navBarItems = [];
     $navBarItems[] = ['label' => 'Home', 'url' => ['/site/index']];
     $navBarItems[] = ['label' => 'Schools', 'url' => ['/schools/index']];
-    $navBarItems[] = ['label' => 'School Board', 'url' => ['/board-members/index']];
-    $navBarItems[] = ['label' => 'Add Report', 'url' => ['/reports/create']];
+    $navBarItems[] = ['label' => 'Board', 'url' => ['/board-members/index']];
+    $navBarItems[] = ['label' => 'Report', 'url' => ['/reports/create']];
     $navBarItems[] = ['label' => 'About', 'url' => ['/site/about']];
     $navBarItems[] = ['label' => 'Privacy', 'url' => ['/site/privacy']];
+    $navBarItems[] = ['label' => 'Contact', 'url' => 'mailto:KCSDashboard@gmail.com'];
     //$navBarItems[] = ['label' => 'Contact', 'url' => ['/site/contact']];
     if ( ! Yii::$app->user->isGuest ) {
 	$logoutForm = Html::beginForm(['/user/security/logout'], 'post', ['class' => 'form-inline'])
@@ -54,7 +55,7 @@ AppAsset::register($this);
 	$navBarItems[] = ['label' => 'Reports', 'url' => ['/reports']];
 	$navBarItems[] = $logoutForm;
     } else {
-    	$navBarItems[] = ['label' => 'Admin Login', 'url' => ['/user/security/login']];
+    	$navBarItems[] = ['label' => 'Admin', 'url' => ['/user/security/login']];
     }
 
     echo Nav::widget( [

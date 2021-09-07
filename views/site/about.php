@@ -28,6 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <ul class="browser-default">
 	<li><a href="/reports/create">Create a Report</a></li>
 	<li><a href="/site/privacy">Privacy</a></li>
-	<!--Contact Us-->
+	<li><a href="mailto:KCSDashboard@gmail.com">Contact Us</a></li>
 </ul>
 </div>
