@@ -4,6 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\jui\DatePicker;
 use app\models\School;
 use app\models\Report;
+use app\models\OneTimeCode;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use kartik\select2\Select2;
@@ -30,6 +31,7 @@ $schoolToTypeMap = [];
 foreach ( $schools as $school ) {
 	$schoolToTypeMap[ $school->id ] = $school->type;
 }
+
 ?>
 
 <h1>Add COVID-19 Case Report</h1>
@@ -55,6 +57,8 @@ $form = ActiveForm::begin([
     'id' => 'report-form',
     'options' => ['class' => 'form-vertical'],
 ]) ?>
+
+    <?= $form->field( $model, 'code' )->label( 'Access Code' )->hint( 'Please provide the one-time access code you were provided when asking to submit a report.' ); ?>
 
     <?= $form->field($model, 'school_id')
 	     ->widget( Select2::classname(), 
@@ -94,11 +98,11 @@ $form = ActiveForm::begin([
 	     ] )
     ?>
 
-    <?= $form->field($model, 'symptomatic_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] )->label( 'Symptom Onset Date' ) ?>
-    <?= $form->field($model, 'positive_test_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] )->label( 'Date of Positive Test (when was the test <b>given</b>?)' ) ?>
+    <?= $form->field($model, 'symptomatic_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] )->label( 'Symptom Onset Date' )->hint( 'What was the date on which your child first exhibited symptoms consistent with COVID-19?' ) ?>
+    <?= $form->field($model, 'positive_test_date')->widget(\yii\jui\DatePicker::classname(), [ 'dateFormat' => 'yyyy-MM-dd', ] )->label( 'Date That Positive COVID-19 Test Was <i>Given</i>?' )->hint( 'On what date was your child <b>given</b> a test that indicated that they had COVID-19?' ) ?>
 
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
+    <div class="form-group no-border">
+	<div>
             <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
         </div>
     </div>

@@ -2,8 +2,10 @@
 
 namespace app\models;
 use yii\db\ActiveRecord;
+use yii\db\Query;
 use app\models\School;
 use yii\web\Cookie;
+use app\components\validators\CodeValidator;
 
 class Report extends ActiveRecord {
 
@@ -12,12 +14,34 @@ class Report extends ActiveRecord {
 	}
 
 	public function rules() {
+
 		return [
-			[[ 'school_id', 'positive_test_date', 'grade' ], 'required' ],
+			[[ 'school_id', 'positive_test_date', 'grade', 'code' ], 'required' ],
 			[['positive_test_date', 'symptomatic_date'], 'validatePastDate' ],
+			[['code'], 'validateCode' ],
 		];
 	}
 
+	public function validateCode( $attribute, $params ) {
+		$query = new Query;
+		$row = $query->select( [ 'id', 'code', 'used' ] )
+                                ->from( 'one_time_codes' )
+                                ->where( 'code = "' . $this->code . '"' )
+                                ->one();
+		if ( false === $row) {
+			error_log( print_r( $row, true ) );
+			$this->addError( $attribute, 'The code you have provided is not valid.' );
+		} else {
+			error_log( print_r( $row, true ) );
+			if ( 1 == $row['used'] ) {
+				// TODO: Throttle for this guid if too many tries with invalid codes?
+				$this->addError( $attribute, 'The code you have provided is not valid.' );
+			} else if ( 0 == $row['used'] ) {
+				$this->code = '';
+				\Yii::$app->db->createCommand()->update( 'one_time_codes', [ 'used' => 1, 'used_date' => date( 'Y-m-d H:i:s' ) ], ['id' => $row['id']], )->execute();
+			}
+		}
+	}
 	
 	public function validatePastDate( $attribute, $params ) {
 		$date = new \DateTime();
@@ -49,7 +73,6 @@ class Report extends ActiveRecord {
 			$guid = uniqid( 'kcst_', true );
 		}
 
-
 		// Generate and save a guid
 		$this->guid = $guid;
 		$cookie = new \yii\web\Cookie( [
@@ -62,11 +85,11 @@ class Report extends ActiveRecord {
 		$response_cookies = \Yii::$app->response->cookies;
 		$response_cookies->add( $cookie );
 
-error_log( print_r( $this, true ) );
+		// Require a distinct one-time code before submitting, so that we can reduce the probability of there being spam or test submissions.
+
 		// Look for the "symptomatic" timestamp and, if not present, just use the positive test timestamp
 		// for determining the new case date.
 		$post = \Yii::$app->request->post();
-		error_log( print_r( $post, true ) );
 		if ( isset( $post['Report']['symptomatic'] ) && $post['Report']['symptomatic'] == 'asymptomatic' ) {
 			$this->symptomatic_date = $this->positive_test_date;
 			$this->symptomatic = 0;

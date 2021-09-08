@@ -10,6 +10,8 @@ use yii\web\Response;
 use yii\web\Request;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use yii\base\DynamicModel;
+use yii\db\Query;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\School;
@@ -84,6 +86,22 @@ class ReportsController extends Controller
 	    ] );
     }
 
+	public function validateCode( $attribute, $params ) {
+		$query = new Query;
+		
+		$row = $query->select( [ 'id', 'code', 'used' ] )
+		    		->from( 'one_time_codes' )
+				->where( 'code = "' . $_post['OneTimeCode']['code'] . '"' )
+				->one();
+
+		if ( false === $row ) {
+			$model->addError( 'The code you have provided is not valid.' );
+			error_log( "NO ROW FOUND\n" );
+		} else {
+			error_log( "ROW " . print_r( $row, true ) . " ROW\n");
+		}
+        }
+
     /**
      * Creates report record.
      *
@@ -91,7 +109,8 @@ class ReportsController extends Controller
      */
     public function actionCreate() {
 	    $model = new Report();
-	    if ( $model->load( Yii::$app->request->post()) ) {
+	    $post = Yii::$app->request->post();
+	    if ( $model->load( $post ) ) {
 		    if ( $model->save() ) {
 		    	Yii::$app->session->setFlash( 'success', "Report successfully created!" );
 		    	return $this->redirect( [ 'reports/view', 'id' => $model->id, 'saved' => 1 ] );
