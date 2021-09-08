@@ -53,7 +53,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
                                 )
 			);
 		} else {
-			echo '<p>No data to display yet.</p>';
+			echo '<p>This area should contain a chart that shows new cases reported in the last 30 days. If you\'re seeing this message rather than a chart, it means that we do not have any data for the last 30 days. Please check back again later or <a href="mailto:KCSDashboard@gmail.com">let us know</a> if you think there has been a mistake.</p>';
 		}
                 ?>
 	</div>
@@ -85,7 +85,7 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 			</tbody>
 		</table>
 	<?php else: ?>
-		<p>No active cases reported so far.</p>
+		<p>This area should contain a chart that shows new cases reported in the last 30 days. If you're seeing this message rather than a chart, it means that we do not have any data for the last 30 days. Please check back again later or <a href="mailto:KCSDashboard@gmail.com">let us know</a> if you think there has been a mistake.</p>
 	<?php endif; ?>
 </div>
 
