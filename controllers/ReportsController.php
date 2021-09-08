@@ -86,22 +86,6 @@ class ReportsController extends Controller
 	    ] );
     }
 
-	public function validateCode( $attribute, $params ) {
-		$query = new Query;
-		
-		$row = $query->select( [ 'id', 'code', 'used' ] )
-		    		->from( 'one_time_codes' )
-				->where( 'code = "' . $_post['OneTimeCode']['code'] . '"' )
-				->one();
-
-		if ( false === $row ) {
-			$model->addError( 'The code you have provided is not valid.' );
-			error_log( "NO ROW FOUND\n" );
-		} else {
-			error_log( "ROW " . print_r( $row, true ) . " ROW\n");
-		}
-        }
-
     /**
      * Creates report record.
      *

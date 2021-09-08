@@ -29,10 +29,10 @@ class Report extends ActiveRecord {
                                 ->where( 'code = "' . $this->code . '"' )
                                 ->one();
 		if ( false === $row) {
-			error_log( print_r( $row, true ) );
+			//error_log( print_r( $row, true ) );
 			$this->addError( $attribute, 'The code you have provided is not valid.' );
 		} else {
-			error_log( print_r( $row, true ) );
+			//error_log( print_r( $row, true ) );
 			if ( 1 == $row['used'] ) {
 				// TODO: Throttle for this guid if too many tries with invalid codes?
 				$this->addError( $attribute, 'The code you have provided is not valid.' );
