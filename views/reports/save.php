@@ -21,6 +21,10 @@ $schools = School::find()->orderBy( 'name' )->all();
 $schoolData = ArrayHelper::map( $schools, 'id', 'name' );
 
 $validGrades = School::getValidGrades( 'map' );
+$allValidGradesForSelect2 = [];
+foreach ( School::getValidGrades( 'unspecified' ) as $grade ) {
+	$allValidGradesForSelect2[ $grade ] = $grade;
+}
 $schoolToTypeMap = [];
 
 foreach ( $schools as $school ) {
@@ -80,7 +84,7 @@ $form = ActiveForm::begin([
     ?>
 
 
-    <?= $form->field($model, 'grade')->widget( Select2::classname(), [ 'language' => 'en', 'options' => [ 'placeholder' => 'Select a grade level...' ], 'pluginOptions' => [ 'allowClear' => true ], 'data' => [ '11' => 11, '12' => 12 ] ] )->label( 'Student\'s Grade Level' ); ?>
+    <?= $form->field($model, 'grade')->widget( Select2::classname(), [ 'language' => 'en', 'options' => [ 'placeholder' => 'Select a grade level...' ], 'pluginOptions' => [ 'allowClear' => true ], 'data' => $allValidGradesForSelect2 ] )->label( 'Student\'s Grade Level' ); ?>
 
     <?= $form->field( $model, 'symptomatic' )
 	     ->checkbox( [

@@ -38,7 +38,7 @@ class School extends ActiveRecord {
 			'intermediate' => [ 'K', '1', '2', '3', '4', '5', '6' ],
 			'primary'      => [ 'K', '1', '2', '3', '4', '5', '6' ],
 			'middle'       => [ '6', '7', '8' ],
-			'unspecified'  => [ 'Pre-K', 'Kindergarten', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ],
+			'unspecified'  => [ 'Pre-K', 'K', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' ],
 		];
 
 		if ( 'map' == $type ) {
