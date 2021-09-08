@@ -58,7 +58,7 @@ $form = ActiveForm::begin([
     'options' => ['class' => 'form-vertical'],
 ]) ?>
 
-    <?= $form->field( $model, 'code' )->label( 'Access Code' )->hint( 'Please provide the one-time access code you were provided when asking to submit a report.' ); ?>
+    <?= $form->field( $model, 'code' )->label( 'Access Code' )->hint( 'Please provide the one-time access code you were provided when asking to submit a report. <b>To obtain an access code</b>, please contact the admin of your school\'s <a href="http://kcs-tracing.org/">DIY Contact Tracing Group</a> or send an email to <a href="mailto:kcsdashboard@gmail.com">kcsdashboard@gmail.com</a>' ); ?>
 
     <?= $form->field($model, 'school_id')
 	     ->widget( Select2::classname(), 
