@@ -37,10 +37,12 @@ $formatter = \Yii::$app->formatter;
 			<th>Grade Level</th>
 			<td><?php echo Html::encode( $model->grade ) ?></td>
 		</tr>
+		<?php if ( $model->symptomatic == 1 ) : ?>
 		<tr>
 			<th>Symptomatic Date</th>
 			<td><?php echo Html::encode( $formatter->asDate( $model->symptomatic_date ), 'date' ) ?></td>
 		</tr>
+		<?php endif; ?>
 		<tr>
 			<th>Positive Test Date</th>
 			<td><?php echo Html::encode( $formatter->asDate( $model->positive_test_date ), 'date' ) ?></td>
