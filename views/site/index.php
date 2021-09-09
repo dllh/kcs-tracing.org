@@ -12,8 +12,14 @@ $this->title = 'Knox County Schools DIY COVID-19 Dashboard';
     <div class="jumbotron text-center bg-transparent">
         <h1 class="display-4">KCS DIY COVID-19 Dashboard</h1>
 	<p class="lead">Search for COVID cases in your child's school or report a case of your own.</p>
-	<div id="case-container">
-		<div id="case-count"><p id="cases"><?= Html::encode( $model->caseCount ) ?></p>New cases in the last 30 days</div>
+	<div class="case-container">
+		<div class="case-count"><p id="cases"><?= Html::encode( $model->getCaseCount( 10 ) ) ?></p>New cases in the last 10 days</div>
+	</div>
+	<div class="case-container">
+		<div class="case-count"><p id="cases"><?= Html::encode( $model->getCaseCount( 14 ) ) ?></p>New cases in the last 14 days</div>
+	</div>
+	<div class="case-container">
+		<div class="case-count"><p id="cases"><?= Html::encode( $model->caseCount ) ?></p>New cases in the last 30 days</div>
 	</div>
     </div>
 

@@ -145,16 +145,27 @@ a.desc:after {
 	margin-bottom: 30px;
 }
 
-#case-container {
+.case-container {
 	text-align: center;
+	display: inline-table;
+	width: 30%;
 }
-#case-count{
+
+@media only screen and (max-width: 600px) {
+	.case-container {
+		text-align: center;
+		margin: 8px auto;
+		width: 95%;
+	}
+}
+
+.case-count{
 	background-color: #62b2af;
 	color: #fff;
+	max-width: 95%;
 	text-align: center;
 	padding: 5px 0 25px 0;
 	border-radius: 25px;
-	max-width: 33%;
 	margin: 0 auto;
 	box-shadow: 2px 2px 4px #000;
 	text-shadow: 1px 1px 2px #000;

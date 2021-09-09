@@ -33,11 +33,11 @@ class Site extends ActiveRecord {
                 return $returnData;
 	}
 
-	public function getCaseCount() {
+	public function getCaseCount( $days = 30 ) {
 		$query = new Query;
 		return number_format( $query->select( [ 'id' ] )
 			->from( 'reports' )
-			->where( 'new_case_date BETWEEN ( NOW() - INTERVAL 30 DAY ) AND NOW()' )
+			->where( 'new_case_date BETWEEN ( NOW() - INTERVAL ' . (int) $days . ' DAY ) AND NOW()' )
 			->count() );
 	}
 }
