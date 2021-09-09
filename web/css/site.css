@@ -211,3 +211,32 @@ a.desc:after {
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 }
+
+@media only screen and (max-width: 600px) {
+	.navbar-collapse.collapse.show {
+    		background-color: #072084;
+    		padding-left: 12px;
+	}
+	.navbar-dark .navbar-nav .nav-link.active {
+		padding: 0;
+    		color: #f9ab0e !important;
+	}
+
+	.nav-item a.nav-link:link {
+		padding: 0;
+    		color: #fff !important;
+	}
+	.nav-item a.nav-link:visited {
+		padding: 0;
+    		color: #fff !important;
+	}
+	.nav-item a.nav-link:hover {
+		padding: 0;
+    		color: #f9ab0e !important;
+	}
+	.nav-item a.nav-link:active {
+		padding: 0;
+    		color: #f9ab0e !important;
+	}
+	
+}
