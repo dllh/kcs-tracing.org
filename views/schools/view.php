@@ -29,6 +29,14 @@ $this->params[ 'breadcrumbs' ][] = 'Schools';
 			<th>Board Member</th>
 			<td><?php echo Html::a( $model->boardMember->name, [ 'board-members/view', 'id' => $model->board_member_id ]); ?></td>
 		</tr>
+		<tr>
+			<th>2020 Enrollment</th>
+			<?php if ( isset( $model->enrollment ) && (int) $model->enrollment > 0 ) : ?>
+				<td><?php echo Html::encode( $model->enrollment ); ?></td>
+			<?php else: ?>
+				<td>Unknown</td>
+			<?php endif; ?>
+		</tr>
 	</table>
 
 	<h3>Daily New Cases at This School</h3>
