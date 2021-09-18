@@ -18,7 +18,6 @@ class Search extends ActiveRecord {
 		$where = [];
 		$filterWhere = [];
 
-
 		if ( isset( $params['Search'] ) ) {
 			$params = $params['Search'];
 		} else {
@@ -26,13 +25,13 @@ class Search extends ActiveRecord {
 		}
 
 		if ( isset( $params['school_id'] ) && (int) $params['school_id'] > 0 ) {
-			$filterWhere['school_id']  = (int) $params['school_id'];
+			$filterWhere['school_id'] = (int) $params['school_id'];
 			$this->school_id = (int) $params['school_id'];
 		}
 
 		// TODO: Proper validation of grade based on our whitelist.
 		if ( isset( $params['grade'] ) && ! empty( $params['grade'] ) ) {
-			$filterWhere['grade']  = $params['grade'];
+			$filterWhere['grade'] = (int) $params['grade'];
 			$this->grade = $params['grade'];
 		}
 
@@ -45,23 +44,27 @@ class Search extends ActiveRecord {
 		}
 
 		$query = Report::find()
-			->joinWith( [ 'school' ] )
-			->where ( 'schools.id = reports.school_id' )
+			->joinWith( ['school'] )
+			->where( 'schools.id = reports.school_id' )
 			->andWhere( $where )
 			->andFilterWhere( $filterWhere )
 			->andFilterWhere( [ 'between', 'new_case_date', $params['start_date'], $params['end_date'] ] );
 
 		$dataProvider = new ActiveDataProvider( [
 			'query' => $query,
+			'pagination' => [ 'pageSize' => 1000,  ],
+			'sort'       => [
+                            'defaultOrder' => [
+                                    'positive_test_date' => SORT_ASC, // Not really sure about this, but I do need a default.
+                            ],
+                    ],
 		] );
 
-		// Load the search form data and validate
 		if ( ! ( $this->load( $params ) && $this->validate() ) ) {
-            		return $dataProvider;
+			return $dataProvider;
 		}
-
-
-        	return $dataProvider;
+		
+		return $dataProvider;
 	}
 
 	public function getSchool() {

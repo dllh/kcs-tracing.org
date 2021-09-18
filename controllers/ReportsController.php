@@ -17,6 +17,8 @@ use app\models\ContactForm;
 use app\models\School;
 use app\models\Report;
 use app\models\Search;
+use yii\helpers\ArrayHelper;
+
 
 class ReportsController extends Controller
 {
@@ -131,6 +133,33 @@ class ReportsController extends Controller
     }
 
     /**
+     * Exports results based on query string params.
+     *
+     */
+    public function actionExport() {
+	    $schoolData = ArrayHelper::map( School::find()->orderBy( 'name' )->all(), 'id', 'name' ); 
+	    $searchModel = new Search();
+	    $models = $searchModel->search( Yii::$app->request->get(), 1000 )->getModels();
+
+	    $data = "School Name\tGrade\tSymptomatic?\tSymptomatic Date\tPositive Test Date\tNew Case Date\tActive Case Date\n";
+	    foreach ( $models as $reportObject ) {
+		    $row = $reportObject->toArray();
+		    $data .= $schoolData[ $row['school_id'] ] . "\t";
+		    $data .=  $row['grade'] . "\t";
+		    $data .= $row['symptomatic'] . "\t";
+		    $data .= explode( " ", $row['symptomatic_date'] )[0] . "\t";
+		    $data .= explode( " ", $row['positive_test_date'] )[0] . "\t";
+		    $data .= explode( " ", $row['new_case_date'] )[0] . "\t";
+		    $data .= explode( " ", $row['active_case_date'] )[0] . "\n";
+		    //echo '<pre>' . print_r( $row, true ) . '</pre>';
+	    }
+
+	    $response = Yii::$app->getResponse();
+	    return $response->sendContentAsFile( $data , 'kcsdashboard-' . date( 'Y-m-s_H:i:s' ) . '.csv', [ 'mimeType' => 'text/csv'] )->send();
+    }
+
+
+    /**
      * Edits report record.
      *
      */
@@ -154,7 +183,7 @@ class ReportsController extends Controller
 
 	// List of actions that are available to guests.
 	// The 'create' action here is intentional, as we do want public reports.
-        $publicActionIds = [ 'index', 'view', 'create', 'search' ];
+        $publicActionIds = [ 'index', 'view', 'create', 'search', 'export' ];
 
         // Always return true for logged-in users.
         if ( ! $isGuest ) {
